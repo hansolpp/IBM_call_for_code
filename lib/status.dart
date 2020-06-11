@@ -8,9 +8,6 @@ import 'package:flutter/widgets.dart';
 ///Widget들 사실상 아직 사용 안 함
 /// 없애거나 지워도된다
 class EnvWidget extends StatefulWidget {
-  // final EnvTotalDemo envTotal;
-  // EnvWidget({this.envTotal});
-
   @override
   _EnvWidgetState createState() => _EnvWidgetState();
 }
