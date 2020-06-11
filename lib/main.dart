@@ -31,26 +31,6 @@ class HomePage extends StatefulWidget {
     return HomePageState();
   }
 }
-///////////////////////////////////////////
-class SecondRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );
-  }
-}
-////////////////////////////////////////
 
 class HomePageState extends State<HomePage> {
   List<Widget> cardList = new List();
@@ -67,10 +47,6 @@ class HomePageState extends State<HomePage> {
     super.initState();
     cardList = _generateCards();
   }
-  void updateState() {
-    super.initState();
-    cardList = _generateCards();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,13 +59,12 @@ class HomePageState extends State<HomePage> {
       body: Stack(
         children: <Widget>[
           Container(alignment: Alignment.center,
-              child: new RaisedButton(
+              child: RaisedButton(
                 child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyApp()),
-                  );
+                    setState(() {
+                      cardList = _generateCards();
+                  });
                 },
               )
           ),
