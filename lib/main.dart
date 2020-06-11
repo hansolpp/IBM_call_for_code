@@ -57,6 +57,7 @@ class HomePageState extends State<HomePage> {
     );
   }
 
+  //TODO: PlanetCardList로 갖다쓰기
   List<Widget> _generateCards() {
     List<PlanetCard> planetCard = new List();
     planetCard.add(
@@ -85,6 +86,8 @@ class HomePageState extends State<HomePage> {
           "http://amazingindiablog.in/wp-content/uploads/2015/06/P5035083.jpg",
           110.0),
     );
+
+    //TODO: 여기서 생성하는 cardList를 PlanetCard에 있는 PlanetCards로 바꾸기
     List<Widget> cardList = new List();
 
     for (int x = 0; x < 5; x++) {
