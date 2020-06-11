@@ -31,26 +31,6 @@ class HomePage extends StatefulWidget {
     return HomePageState();
   }
 }
-///////////////////////////////////////////
-class SecondRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );
-  }
-}
-////////////////////////////////////////
 
 class HomePageState extends State<HomePage> {
   List<Widget> cardList = new List();
@@ -67,10 +47,6 @@ class HomePageState extends State<HomePage> {
     super.initState();
     cardList = _generateCards();
   }
-  void updateState() {
-    super.initState();
-    cardList = _generateCards();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,13 +59,12 @@ class HomePageState extends State<HomePage> {
       body: Stack(
         children: <Widget>[
           Container(alignment: Alignment.center,
-              child: new RaisedButton(
+              child: RaisedButton(
                 child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyApp()),
-                  );
+                    setState(() {
+                      cardList = _generateCards();
+                  });
                 },
               )
           ),
@@ -116,34 +91,6 @@ class HomePageState extends State<HomePage> {
     for(int i = 0; i<4; i++){
       planetCard[i].topMargin = ((i+5)*10).toDouble();
     }
-
-    // List<PlanetCard> planetCard = new List();
-    // planetCard.add(
-    //   PlanetCard(
-    //       "Mussorie",
-    //       "https://www.tripsavvy.com/thmb/LTudD1VFIPILWGW5MoCsgBmhOGs=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/464741705-56a3c03d5f9b58b7d0d39809.jpg",
-    //       70.0),
-    // );
-    // planetCard.add(
-    //   PlanetCard(
-    //       "Manali ",
-    //       "https://www.tripsavvy.com/thmb/YGzlP0l5lE79cah0LdH8sSWe7EI=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-535240938-591c2d7b3df78cf5fa4919b5.jpg",
-    //       80.0),
-    // );
-    // planetCard.add(PlanetCard(
-    //     "Gangtok (Sikkim)",
-    //     "https://www.tripsavvy.com/thmb/5X29hRjFEbE-5IYT3PFk30kqMZ4=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-675923006-5a82469c3418c6003689af24.jpg",
-    //     90.0));
-    // planetCard.add(PlanetCard(
-    //     "Darjeeling (West Bengal)",
-    //     "https://www.tripsavvy.com/thmb/xbATyZ6fE8sMFYDrDXU7P1wnbgE=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-503908231-591be3103df78cf5fa000b74.jpg",
-    //     100.0));
-    // planetCard.add(
-    //   PlanetCard(
-    //       "Nainital (Uttarakhand)",
-    //       "http://amazingindiablog.in/wp-content/uploads/2015/06/P5035083.jpg",
-    //       110.0),
-    // );
 
     //TODO: 여기서 생성하는 cardList를 PlanetCard에 있는 PlanetCards로 바꾸기
     //카드 정보를 가져와서 보여주는 위젯으로 만들기
