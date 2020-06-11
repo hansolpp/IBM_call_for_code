@@ -108,10 +108,15 @@ class HomePageState extends State<HomePage> {
             onDismissed: (direction){
               int dir;
               direction == DismissDirection.endToStart? dir = 0 : dir = 1;
+              //TODO: 임시로 팝업 뜨는거만 확인
+
+//              endingPopup
+
               setState(() {
                 envTotalDemo.effect(_current.envStatus[dir]);
                 print("sp:${envTotalDemo.species},sea:${envTotalDemo.seaLevel},ozo:${envTotalDemo.ozone},temp:${envTotalDemo.temper}");
                 removeCards(x);
+
                 //팝업 테스트
                 if(envTotalDemo.temper >= 70){
                   showDialog(
@@ -124,7 +129,6 @@ class HomePageState extends State<HomePage> {
             },
             child: CustomCard(_current),
           ),
-
 
 
           /// tinder처럼 움직이는 카드를 위한 코드
