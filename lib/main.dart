@@ -122,6 +122,10 @@ class HomePageState extends State<HomePage> {
 //    }
 
 
+    //FIXME: draggablecard 넣으니까
+    // 움직임이 stack 안에서 고정된다....
+    // 움직일때 양도 적어지고, stack 밖으로 못 나감!
+
     for(int x = 0; x<CARDS_NUM; x++){
       cardList.add(
         Align(

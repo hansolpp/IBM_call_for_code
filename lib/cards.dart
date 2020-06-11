@@ -67,9 +67,13 @@ with SingleTickerProviderStateMixin{
       onPanDown: (details){
         _controller.stop();
       },
+
       onPanUpdate: (details){
         setState((){
+//          _dragAlignment = Alignment(details.delta.dx, details.delta.dy);
           _dragAlignment += Alignment(
+//            details.delta.dx,
+//            details.delta.dy
             details.delta.dx / (size.width /2),
             details.delta.dy / (size.height /2),
           );
