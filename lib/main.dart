@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'PlanetCard.dart';
 import 'CardDetails.dart';
+import 'PlanetCard.dart';
+import 'PlanetCard.dart';
+import 'PlanetCard.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,36 +61,52 @@ class HomePageState extends State<HomePage> {
   }
 
   //TODO: PlanetCardList로 갖다쓰기
+  // cardlist에 들어갈 카드들 생성하는 메소드 : 필요없음?
+  // demoPlanetCards에서 4개씩 가져와야겠다
+
   List<Widget> _generateCards() {
-    List<PlanetCard> planetCard = new List();
-    planetCard.add(
-      PlanetCard(
-          "Mussorie",
-          "https://www.tripsavvy.com/thmb/LTudD1VFIPILWGW5MoCsgBmhOGs=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/464741705-56a3c03d5f9b58b7d0d39809.jpg",
-          70.0),
-    );
-    planetCard.add(
-      PlanetCard(
-          "Manali ",
-          "https://www.tripsavvy.com/thmb/YGzlP0l5lE79cah0LdH8sSWe7EI=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-535240938-591c2d7b3df78cf5fa4919b5.jpg",
-          80.0),
-    );
-    planetCard.add(PlanetCard(
-        "Gangtok (Sikkim)",
-        "https://www.tripsavvy.com/thmb/5X29hRjFEbE-5IYT3PFk30kqMZ4=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-675923006-5a82469c3418c6003689af24.jpg",
-        90.0));
-    planetCard.add(PlanetCard(
-        "Darjeeling (West Bengal)",
-        "https://www.tripsavvy.com/thmb/xbATyZ6fE8sMFYDrDXU7P1wnbgE=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-503908231-591be3103df78cf5fa000b74.jpg",
-        100.0));
-    planetCard.add(
-      PlanetCard(
-          "Nainital (Uttarakhand)",
-          "http://amazingindiablog.in/wp-content/uploads/2015/06/P5035083.jpg",
-          110.0),
-    );
+    //화면에 보여줄 카드 4개 선택
+    //planetCard에서 4개 가져오기
+    
+    // List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
+    print("lenght::${demoPlanetCards.length}");
+    List<PlanetCard> planetCard = demoPlanetCards;
+    //margin값 설정하기
+    for(int i = 0; i<4; i++){
+      planetCard[i].topMargin = ((i+5)*10).toDouble();
+    }
+
+    // List<PlanetCard> planetCard = new List();
+    // planetCard.add(
+    //   PlanetCard(
+    //       "Mussorie",
+    //       "https://www.tripsavvy.com/thmb/LTudD1VFIPILWGW5MoCsgBmhOGs=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/464741705-56a3c03d5f9b58b7d0d39809.jpg",
+    //       70.0),
+    // );
+    // planetCard.add(
+    //   PlanetCard(
+    //       "Manali ",
+    //       "https://www.tripsavvy.com/thmb/YGzlP0l5lE79cah0LdH8sSWe7EI=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-535240938-591c2d7b3df78cf5fa4919b5.jpg",
+    //       80.0),
+    // );
+    // planetCard.add(PlanetCard(
+    //     "Gangtok (Sikkim)",
+    //     "https://www.tripsavvy.com/thmb/5X29hRjFEbE-5IYT3PFk30kqMZ4=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-675923006-5a82469c3418c6003689af24.jpg",
+    //     90.0));
+    // planetCard.add(PlanetCard(
+    //     "Darjeeling (West Bengal)",
+    //     "https://www.tripsavvy.com/thmb/xbATyZ6fE8sMFYDrDXU7P1wnbgE=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-503908231-591be3103df78cf5fa000b74.jpg",
+    //     100.0));
+    // planetCard.add(
+    //   PlanetCard(
+    //       "Nainital (Uttarakhand)",
+    //       "http://amazingindiablog.in/wp-content/uploads/2015/06/P5035083.jpg",
+    //       110.0),
+    // );
 
     //TODO: 여기서 생성하는 cardList를 PlanetCard에 있는 PlanetCards로 바꾸기
+    //카드 정보를 가져와서 보여주는 위젯으로 만들기
+
     List<Widget> cardList = new List();
 
     for (int x = 0; x < 5; x++) {

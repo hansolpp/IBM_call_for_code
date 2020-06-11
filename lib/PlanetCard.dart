@@ -86,7 +86,7 @@ class PlanetCard {
   String cardTitle;
   String cardText;
   String cardImage;
-  double topMargin;
+  double _topMargin;
   //TODO: add Env
 
   //   this.cardTitle = title;
@@ -99,8 +99,14 @@ class PlanetCard {
     this.cardTitle,
     this.cardText,
     this.cardImage,
-    this.topMargin
+    // this.topMargin
   });
   // }
+
+  set topMargin(double topMargin){
+    this._topMargin = topMargin;
+  }
+
+  get topMargin => _topMargin;
 
 }
