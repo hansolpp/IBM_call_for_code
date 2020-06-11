@@ -122,20 +122,58 @@ class HomePageState extends State<HomePage> {
 //    }
 
 
-    for(int i = 0; i<CARDS_NUM; i++){
+    for(int x = 0; x<CARDS_NUM; x++){
       cardList.add(
         Align(
           alignment: Alignment.topCenter,
           child: Padding(
-              padding: EdgeInsets.only(top: ((i+20)*10).toDouble()),
+              padding: EdgeInsets.only(top: ((x+20)*10).toDouble()),
 //              padding: EdgeInsets.only(top: planetCard[i].topMargin),
-//          child: FlutterLogo(size: 127),
               child: DraggableCard(
-                  child: FlutterLogo(size:128))
-          ),
-//          margin: const EdgeInsets.only(top: 20.0),
-
-        ),
+                  child: Card(
+                    elevation: 8.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                   color: Color.fromARGB(250, 112, 19, 179),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                topRight: Radius.circular(20.0)),
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    planetCard[x].cardImage
+                                ),
+//                                NetworkImage(),
+                                fit: BoxFit.cover
+                            ),
+                          ),
+                          height: 300.0,
+                          width: 320.0,
+                        ),
+                        Container(
+                          width: 320,
+                          padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10,right: 10),
+                          child: Column(
+                            children: <Widget> [
+                              Text(planetCard[x].cardTitle,
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.amber),
+                              ),
+                              Text(planetCard[x].cardText,
+                                style: TextStyle(fontSize: 20, color: Colors.white),
+                              ),
+                          ],
+                          ),
+                        ),
+                      ],
+                    )),
+              )
+                  ),
+                ),
+//                  child: FlutterLogo(size:128))
       );
     }
 
