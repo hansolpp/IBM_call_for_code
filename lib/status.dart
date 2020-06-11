@@ -67,9 +67,10 @@ class EnvStatus {
   final int seaLevel;
   final int ozone;
   final int temper;
+  static const int defaultVal = 0;
 
   /// Named Option Parma으로 넣었는데
   /// 나중에 데이터 넣기 너무 귀찮으면 그냥 Position Optional로 바꿀래...
   /// https://stackoverflow.com/questions/52449508/constructor-optional-params
-  EnvStatus({this.species = 0, this.seaLevel = 0, this.ozone = 0, this.temper =0});
+  EnvStatus({this.species = defaultVal, this.seaLevel = defaultVal, this.ozone = defaultVal, this.temper =defaultVal});
 }
