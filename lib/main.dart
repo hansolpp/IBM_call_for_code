@@ -67,9 +67,9 @@ class HomePageState extends State<HomePage> {
   List<Widget> _generateCards() {
     //화면에 보여줄 카드 4개 선택
     //planetCard에서 4개 가져오기
-    
     // List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
     print("lenght::${demoPlanetCards.length}");
+    //FIXME: sublist cards
     List<PlanetCard> planetCard = demoPlanetCards;
     //margin값 설정하기
     for(int i = 0; i<4; i++){
