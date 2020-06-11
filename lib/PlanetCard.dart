@@ -33,7 +33,7 @@ final List < PlanetCard > demoPlanetCards = [
   new PlanetCard(
     cardTitle: "모두 -10 / 모두 + 10",
     cardText: "사진이 4개밖에 안들어가요 버그좀 고쳐주세요 (예/ 아니오)",
-    cardImage: "assets/photo_3.jpg",
+    cardImage: "assets/photo_4.jpg",
     // envStatus: [
     //   EnvStatus(species: -10, seaLevel: -10, temper: -10, ozone: -10),
     //   EnvStatus(species: 10, seaLevel: 10, temper: 10, ozone: 10),

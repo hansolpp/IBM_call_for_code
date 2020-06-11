@@ -108,49 +108,30 @@ class HomePageState extends State<HomePage> {
   List<Widget> _generateCards() {
     //화면에 보여줄 카드 4개 선택
     //planetCard에서 4개 가져오기
-    // List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
-    print("lenght::${demoPlanetCards.length}");
+//    List<PlanetCard> planetCard = demoPlanetCards;
+    const int CARDS_NUM = 4;
+    List<PlanetCard> planetCard = demoPlanetCards.sublist(0,CARDS_NUM);
+//    print("lenght::${demoPlanetCards.length}");
+//    planetCard = planetCard.sublist(0,4);
+//    print("demo: ${demoPlanetCards.length}, planet: ${planetCard.length}");
+//     List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
+//     planetCard = demoPlanetCards.sublist(5,7);
+
     //FIXME: sublist cards
-    List<PlanetCard> planetCard = demoPlanetCards;
+//    List<PlanetCard> planetCard = demoPlanetCards;
     //margin값 설정하기
-    for(int i = 0; i<4; i++){
+    for(int i = 0; i<CARDS_NUM; i++){
       planetCard[i].topMargin = ((i+5)*10).toDouble();
     }
-
-    // List<PlanetCard> planetCard = new List();
-    // planetCard.add(
-    //   PlanetCard(
-    //       "Mussorie",
-    //       "https://www.tripsavvy.com/thmb/LTudD1VFIPILWGW5MoCsgBmhOGs=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/464741705-56a3c03d5f9b58b7d0d39809.jpg",
-    //       70.0),
-    // );
-    // planetCard.add(
-    //   PlanetCard(
-    //       "Manali ",
-    //       "https://www.tripsavvy.com/thmb/YGzlP0l5lE79cah0LdH8sSWe7EI=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-535240938-591c2d7b3df78cf5fa4919b5.jpg",
-    //       80.0),
-    // );
-    // planetCard.add(PlanetCard(
-    //     "Gangtok (Sikkim)",
-    //     "https://www.tripsavvy.com/thmb/5X29hRjFEbE-5IYT3PFk30kqMZ4=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-675923006-5a82469c3418c6003689af24.jpg",
-    //     90.0));
-    // planetCard.add(PlanetCard(
-    //     "Darjeeling (West Bengal)",
-    //     "https://www.tripsavvy.com/thmb/xbATyZ6fE8sMFYDrDXU7P1wnbgE=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-503908231-591be3103df78cf5fa000b74.jpg",
-    //     100.0));
-    // planetCard.add(
-    //   PlanetCard(
-    //       "Nainital (Uttarakhand)",
-    //       "http://amazingindiablog.in/wp-content/uploads/2015/06/P5035083.jpg",
-    //       110.0),
-    // );
 
     //TODO: 여기서 생성하는 cardList를 PlanetCard에 있는 PlanetCards로 바꾸기
     //카드 정보를 가져와서 보여주는 위젯으로 만들기
 
     List<Widget> cardList = new List();
 
-    for (int x = 0; x < 5; x++) {
+
+    //card 4개 보여주기
+    for (int x = 0; x < CARDS_NUM; x++) {
       cardList.add(
         Positioned(
           top: planetCard[x].topMargin,
@@ -158,8 +139,9 @@ class HomePageState extends State<HomePage> {
               onDragEnd: (drag) {
                 removeCards(x);
               },
+
               childWhenDragging: Container(),
-              feedback: GestureDetector(
+              feedback: GestureDetector( //카드 드래그했을때 이미지 상태 설정
                 onTap: () {
                   print("Hello All");
                 },
@@ -168,12 +150,12 @@ class HomePageState extends State<HomePage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  // color: Color.fromARGB(250, 112, 19, 179),
+                   color: Color.fromARGB(250, 112, 19, 179),
                   child: Column(
                     children: <Widget>[
                       Hero(
                         tag: "imageTag",
-                        child: Image.network(
+                        child: Image.asset(
                           planetCard[x].cardImage,
                           width: 20.0,
                           height: 440.0,
@@ -181,12 +163,13 @@ class HomePageState extends State<HomePage> {
                         ),
                       ),
                       Container(
+                        //드래그할때 보이는 글자 설정
                         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                         child: Text(
                           planetCard[x].cardTitle,
                           style: TextStyle(
                             fontSize: 20.0,
-                            color: Colors.purple,
+                            color: Colors.green,
                           ),
                         ),
                       )
@@ -195,18 +178,21 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
               child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return CardDetails(planetCard[x].cardImage, x);
-                  }));
-                },
+//                onTap: () {
+//                  Navigator.of(context)
+//                      .push(MaterialPageRoute(builder: (BuildContext context) {
+//                    return CardDetails(planetCard[x].cardImage, x);
+//                  }));
+//                },
+              onTap:(){
+                //nothing to do
+              },
                 child: Card(
                     elevation: 8.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    // color: Color.fromARGB(250, 112, 19, 179),
+                     color: Color.fromARGB(250, 112, 19, 179),
                     child: Column(
                       children: <Widget>[
                         Container(
@@ -215,8 +201,12 @@ class HomePageState extends State<HomePage> {
                                 topLeft: Radius.circular(20.0),
                                 topRight: Radius.circular(20.0)),
                             image: DecorationImage(
-                                image: NetworkImage(planetCard[x].cardImage),
-                                fit: BoxFit.cover),
+                                image: AssetImage(
+                                    planetCard[x].cardImage
+                                ),
+//                                NetworkImage(),
+                                fit: BoxFit.cover
+                            ),
                           ),
                           height: 300.0,
                           width: 320.0,
@@ -226,24 +216,19 @@ class HomePageState extends State<HomePage> {
                           padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10,right: 10),
                           child: Column(
                             children: <Widget> [
-                              Text("신재생에너지 선택의 갈림길", style:
-                                TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                          Text(
-                                "스타트업과 정부의 합작 작품으로,"
-                                " 이번에 바이오연료가 개발되었습니다! "
-                                "하지만 기존 석유 에너지 업체에서 반발이 심하네요.. "
-                                "당신은 어떤 방향으로 갈지 결정해야합니다",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.purple,
-                            ),
-                          ),
-                          ]
+                              Text(planetCard[x].cardTitle,
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.amber),
+                              ),
+                              Text(planetCard[x].cardText,
+                                style: TextStyle(fontSize: 20, color: Colors.white),
+                              ),
+                          ],
                           )
                         )
                       ],
                     )),
-              )),
+              )
+          ),
         ),
       );
     }
