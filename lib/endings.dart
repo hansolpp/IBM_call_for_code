@@ -69,11 +69,11 @@ class EndingCard {
 
 class EndingPopup extends StatefulWidget {
   final Widget child;
-  final EndingCard _endingCard;
-  EndingPopup(this._endingCard, {this.child});
+  final EndingCard endingCard;
+  EndingPopup({this.endingCard, this.child});
 
   @override
-  _EndingPopupState createState() => _EndingPopupState(this._endingCard);
+  _EndingPopupState createState() => _EndingPopupState(this.endingCard);
 }
 
 class _EndingPopupState extends State<EndingPopup> {

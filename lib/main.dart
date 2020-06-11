@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tinder_swipe_cards/endings.dart';
 import 'package:tinder_swipe_cards/status.dart';
 import 'PlanetCard.dart';
 import 'CardDetails.dart';
@@ -37,6 +38,7 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
 
   EnvTotalDemo envTotalDemo = new EnvTotalDemo();
+  EndingPopup endingPopup = new EndingPopup();  //FIXME: 임시객체
 
   List<Widget> cardList = new List();
 
@@ -106,10 +108,23 @@ class HomePageState extends State<HomePage> {
             onDismissed: (direction){
               int dir;
               direction == DismissDirection.endToStart? dir = 0 : dir = 1;
+              //TODO: 임시로 팝업 뜨는거만 확인
+
+//              endingPopup
+
               setState(() {
                 envTotalDemo.effect(_current.envStatus[dir]);
                 print("sp:${envTotalDemo.species},sea:${envTotalDemo.seaLevel},ozo:${envTotalDemo.ozone},temp:${envTotalDemo.temper}");
                 removeCards(x);
+
+                //팝업 테스트
+                if(envTotalDemo.temper >= 70){
+                  showDialog(
+                    context: context,
+                    builder: (_) => endingPopup,
+                    barrierDismissible: false,
+                  );
+                }
               });
             },
             child: CustomCard(_current),
