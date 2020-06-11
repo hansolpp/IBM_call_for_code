@@ -28,6 +28,26 @@ class HomePage extends StatefulWidget {
     return HomePageState();
   }
 }
+///////////////////////////////////////////
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            // Navigate back to first route when tapped.
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+////////////////////////////////////////
 
 class HomePageState extends State<HomePage> {
   List<Widget> cardList = new List();
@@ -44,6 +64,10 @@ class HomePageState extends State<HomePage> {
     super.initState();
     cardList = _generateCards();
   }
+  void updateState() {
+    super.initState();
+    cardList = _generateCards();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +77,24 @@ class HomePageState extends State<HomePage> {
         title: Text("임기 10년 째"),
         backgroundColor: Colors.purple,
       ),
-      body: Stack(alignment: Alignment.center, children: cardList),
+      body: Stack(
+        children: <Widget>[
+          Container(alignment: Alignment.center,
+              child: new RaisedButton(
+                child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyApp()),
+                  );
+                },
+              )
+          ),
+          Container(
+            child: Stack(alignment: Alignment.center, children: cardList),
+          ),
+        ],
+      )
     );
   }
 
