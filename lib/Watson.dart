@@ -19,7 +19,7 @@ class _WatsonState extends State<Watson> {
     version: '2020-06-13',
     username: 'apikey',
     apikey: '2DwnuMUQPhTZLrwSI0HNmH8ZolbRtF5b1G4AHyUg1Amq',
-    assistantID: '886d997d-172e-4dc8-a513-6e83f752e92d',
+    assistantID: '274db44c-2991-4d2b-834f-99bbd7788e7f',
     url: 'https://api.kr-seo.assistant.watson.cloud.ibm.com/instances/6e932cbc-6f39-4b7b-8489-17ca9fbe8ee3/v2',
   );
 
@@ -52,12 +52,16 @@ class _WatsonState extends State<Watson> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('환경부 장관실'),
+        title: Text('환경부 장관실',
+          style: TextStyle(
+            fontSize: 30,
+          ),
+        ),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.restore,
+              Icons.keyboard_arrow_right,
             ),
             onPressed: () {
               Navigator.push(
@@ -80,9 +84,14 @@ class _WatsonState extends State<Watson> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              //FloatingActionButton(
+              //  child: Icon(Icons.all_inclusive),
+              //),
               Text(
-                _text != null ? '$_text' : '',
-                style: Theme.of(context).textTheme.display1,
+                _text != null ? '$_text' : '플레이하고 싶다면 \'자시게 게임 시작\'을 눌러주세요',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
                 textAlign: TextAlign.left,
               ),
               SizedBox(
@@ -121,11 +130,5 @@ class _WatsonState extends State<Watson> {
         child: Icon(Icons.send),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    myController.dispose();
-    super.dispose();
   }
 }
