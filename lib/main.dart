@@ -60,7 +60,6 @@ class HomePageState extends State<HomePage> {
     super.initState();
     cardList = _generateCards();
     SystemChrome.setEnabledSystemUIOverlays([]);
-
   }
 
   @override
