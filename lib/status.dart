@@ -16,7 +16,7 @@ class EnvWidget extends StatefulWidget {
 
 class _EnvWidgetState extends State<EnvWidget> {
 
-  final EnvTotalDemo envTotal;
+  final EnvTotalDemo envTotal; 
 
 //뭔지모르겠는데 일단씀
   void initState(){
@@ -43,17 +43,23 @@ class _EnvWidgetState extends State<EnvWidget> {
 // FIXME: 값 보여주는 위젯 새로고침할때 쓸라고 notifier 갖다넣음 (혹시몰라서 넣은것)
 class EnvTotalDemo {
   int species, seaLevel, ozone, temper;
+  static const int defaultVal = 50;
 
   static final EnvTotalDemo _singleton = new EnvTotalDemo._internal();
   factory EnvTotalDemo(){
     return _singleton;
   }
   EnvTotalDemo._internal(){
-    const int defaultVal = 50;
     species = defaultVal;
     seaLevel = defaultVal;
     ozone= defaultVal;
     temper = defaultVal;
+  }
+  void reset() {
+    this.species = defaultVal;
+    this.seaLevel = defaultVal;
+    this.ozone = defaultVal;
+    this.temper = defaultVal;
   }
 
 
