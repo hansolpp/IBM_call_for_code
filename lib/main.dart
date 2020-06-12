@@ -116,7 +116,12 @@ class HomePageState extends State<HomePage> {
                         child: Padding(
                           padding: EdgeInsets.only(top: 80, left: 30, right: 30, bottom: 80),
                           child: Container(
-                            child: Text('장관님!\n현재 기후변화 평가는\n00입니다.\n앞으로도 수고해주세요^^',
+                            child: Text('장관님!\n현재 기후변화 평가는\n' +
+                                '종의 다양성 : ${envTotalDemo.species}\n'+
+                                '해수면 높이 : ${envTotalDemo.seaLevel}m\n'+
+                                '연 평균 기온 상승도 : ${envTotalDemo.temper}\n'+
+                                '오존층 파괴 두께 : ${envTotalDemo.ozone}\n'+
+                                    '입니다.\n앞으로도 수고해주세요^^',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.lightBlue[900],
@@ -184,7 +189,6 @@ class HomePageState extends State<HomePage> {
                             Text(" ${coin.coin}",
                             style: TextStyle(fontSize: 40, color: Color.fromARGB(255, 188, 142, 39), fontWeight: FontWeight.bold),
                             ),
-
                           ],
                         ),
                         Image.asset("assets/icons/env_soso.png", width: 80, height: 80, fit: BoxFit.fill),
