@@ -176,9 +176,18 @@ class HomePageState extends State<HomePage> {
                     child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Image.asset("assets/icons/comp_good.jpg", width: 80, height: 80, fit: BoxFit.fill),
-                        Image.asset("assets/icons/coin.png", width: 70, height: 70, fit: BoxFit.fill),
-                        Image.asset("assets/icons/env_soso.jpg", width: 80, height: 80, fit: BoxFit.fill),
+                        Image.asset("assets/icons/comp_good.png", width: 80, height: 80, fit: BoxFit.fill),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset("assets/icons/coin.png", width: 70, height: 70, fit: BoxFit.fill),
+                            Text(" ${coin.coin}",
+                            style: TextStyle(fontSize: 40, color: Color.fromARGB(255, 188, 142, 39), fontWeight: FontWeight.bold),
+                            ),
+
+                          ],
+                        ),
+                        Image.asset("assets/icons/env_soso.png", width: 80, height: 80, fit: BoxFit.fill),
                       ],
                     ),
                   ),
