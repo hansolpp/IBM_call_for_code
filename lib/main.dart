@@ -74,162 +74,130 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-
-      body: Stack(
-        children: <Widget>[
-
-          Container(
-              decoration: BoxDecoration(
-                color: Colors.amber[50],
-              ),
-              alignment: Alignment(0.0, -1.0),
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(),
-                color: Colors.amber[50],
-                child: Padding(
-                  padding: EdgeInsets.only(top: 40),
-                  child: Container(
-                    child: Text('1st Spring ${coin.coin}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.lightBlue[900],
-                        fontSize: 45,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  setState(() {
-
-                  });
-                },
+      /// 연수 상단바 + 선정 상단바
       body: Container(
         color: Colors.amber,
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center, // 주 축 기준 중앙
           children: <Widget>[
+
             /// 상단바
             Container(
               color: Colors.green,
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               height: 100,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 //TODO: 카드 상태 따라 글자 바꾸기
                 child: Text("1st Spring",
-                style: TextStyle(
-                  fontSize: 56,
-                )),
-              )
+                    style: TextStyle(
+                      fontSize: 56,
+                    )),
+              ),
             ),
+
             //stack container
             Expanded(
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Stack(
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.center,
-                        child: RaisedButton(
-                          child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
-                          onPressed: () {
+
+                    //리셋버튼
+                    Container(alignment: Alignment.center,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(),
+                        color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 80,
+                              left: 30,
+                              right: 30,
+                              bottom: 80),
+                          child: Container(
+                            child: Text(
+                              '장관님!\n현재 기후변화 평가는\n00입니다.\n앞으로도 수고해주세요^^',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.lightBlue[900],
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (coin.coin < 0) {
+                            setState(() {
+                              coin = new Coin();
+                              envTotalDemo.reset();
+                              CARD_START_NUM = 0;
+                              cardList = _generateCards();
+                            });
+                          }
+                          else {
                             setState(() {
                               CARD_START_NUM += CARDS_NUM;
                               cardList = _generateCards();
                             });
-                          },
-                        ),
-                    ),  //button
+                          }
+                        },
+                      ),
+                    ),
                     Container(
-                      child: Stack(alignment: Alignment.center, children:  cardList),
-                    ),// Card Stack
+                      child: Stack(
+                          alignment: Alignment.center, children: cardList),
+                    ), // Card Stack
                   ],
                 ),
-            ),
+              ),
             ),
             // bottom container
-            Container(  //TODO: 다 절대값으로 해놨다. 상대값으로 바꿀것...
+            Container( //TODO: 다 절대값으로 해놨다. 상대값으로 바꿀것...
               height: 100,
               color: Colors.cyanAccent,
               alignment: Alignment.center,
               child: Stack(
                 children: <Widget>[
-                  Container(  //background
+                  Container( //background
                     color: Colors.red,
                     alignment: Alignment.center,
                     height: 50,
-                    margin: EdgeInsets.only(left: 10, right: 10, top:25, bottom: 25),
+                    margin: EdgeInsets.only(
+                        left: 10, right: 10, top: 25, bottom: 25),
                   ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Image.asset("assets/icons/comp_soso.jpg", width: 80, height: 80, fit: BoxFit.fill),
-                      Image.asset("assets/icons/coin.png", width: 70, height: 70, fit: BoxFit.fill),
-                      Image.asset("assets/icons/env_soso.jpg", width: 80, height: 80, fit: BoxFit.fill),
-                    ],
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Image.asset("assets/icons/comp_soso.jpg", width: 80,
+                            height: 80,
+                            fit: BoxFit.fill),
+                        Image.asset("assets/icons/coin.png", width: 70,
+                            height: 70,
+                            fit: BoxFit.fill),
+                        Image.asset("assets/icons/env_soso.jpg", width: 80,
+                            height: 80,
+                            fit: BoxFit.fill),
+                      ],
+                    ),
                   ),
-                ),
                 ],
-//              ),
-      ),
+              ),
             ),
           ],
         ),
         ),
-      );
-          ),
-
-          Container(alignment: Alignment.center,
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(),
-                color: Colors.white,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 80, left: 30, right: 30, bottom: 80),
-                  child: Container(
-                    child: Text('장관님!\n현재 기후변화 평가는\n00입니다.\n앞으로도 수고해주세요^^',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.lightBlue[900],
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  if(coin.coin < 0) {
-                    setState(() {
-                      coin = new Coin();
-                      envTotalDemo.reset();
-                      CARD_START_NUM = 0;
-                      cardList = _generateCards();
-                    });
-                  }
-                  else {
-                    setState(() {
-                      CARD_START_NUM += CARDS_NUM;
-                      cardList = _generateCards();
-
-                    });
-                  }
-                },
-              ),
-          ),
-
-          Container(
-            //TODO: child draggablecard로 바꾸기
-//            child: Stack(alignment: Alignment.center, children: cardList),
-            child: Stack(alignment: Alignment.center, children:  cardList),
-          ),
-        ],
-      )
     );
   }
 
@@ -259,8 +227,8 @@ class HomePageState extends State<HomePage> {
           top: _current.topMargin,
           child: Dismissible(
             key: ValueKey(x),
-            direction: DismissDirection.horizontal,
-            background: Container(child: Text("${_current.selectText[0]}"), color: Colors.red),
+//            direction: DismissDirection.horizontal,
+//            background: Container(child: Text("${_current.selectText[0]}"), color: Colors.red),
             secondaryBackground: Container(child: Text("${_current.selectText[1]}"), color: Colors.green),
             direction: coin.dir(_current.coin[0], _current.coin[1]),
             background: Container(
@@ -272,7 +240,7 @@ class HomePageState extends State<HomePage> {
                 ),
                 color: Colors.red
             ),
-            secondaryBackground: Container(color: Colors.green),
+//            secondaryBackground: Container(color: Colors.green),
 //            crossAxisEndOffset: 1,
             onDismissed: (direction){
               int dir;
