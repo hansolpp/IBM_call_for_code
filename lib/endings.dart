@@ -6,6 +6,7 @@ import './status.dart';
 ///엔딩을 모아놓는 파일
 ///
 ///
+///
 final List<EndingCard> endingList = [
   new EndingCard(
     cardTitle: "species 70",

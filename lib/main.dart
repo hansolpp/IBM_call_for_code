@@ -117,17 +117,15 @@ class HomePageState extends State<HomePage> {
   }
 
   List<Widget> _generateCards() {
-    //planetCard에서 4개 가져오기
-//    List<PlanetCard> planetCard = demoPlanetCards;
-    List<PlanetCard> planetCard = demoPlanetCards.sublist(CARD_START_NUM, CARD_START_NUM + CARDS_NUM);
-//    print("lenght::${demoPlanetCards.length}");
-//    planetCard = planetCard.sublist(0,4);
-//    print("demo: ${demoPlanetCards.length}, planet: ${planetCard.length}");
-//     List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
-//     planetCard = demoPlanetCards.sublist(5,7);
+    //planetCard에서 계절별로 하나씩 , 총 4개 가져오기
+    List<PlanetCard> planetCard = new List();
+    //spring random
+    Random random = new Random();
+    for(int i = 3; i>=0; i--){
+      int idx = random.nextInt(demoPlanetCards[i].length);
+      planetCard.add(demoPlanetCards[i][idx]);
+    }
 
-    //FIXME: sublist cards
-//    List<PlanetCard> planetCard = demoPlanetCards;
     //margin값 설정하기
     for(int i = 0; i<CARDS_NUM; i++){
       planetCard[i].topMargin = ((i+10)*10).toDouble();
