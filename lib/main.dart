@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
-        '/': (context) => Intro(),
+        '/': (context) => Watson(),
 /*          '/cardDetails': (BuildContext context) {
             // return new CardDetails();
           },*/
@@ -34,9 +34,8 @@ class MyApp extends StatelessWidget {
     //home: HomePage());
     //home: MyHomePage());
     //home: Intro());
-    home: Watson();
-    );
-  }
+    //home: Watson());
+    );}
 }
 
 class HomePage extends StatefulWidget {
