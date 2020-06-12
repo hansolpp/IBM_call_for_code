@@ -81,7 +81,7 @@ class _WatsonState extends State<Watson> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                _text != null ? '$_text' : 'Watson Response Here',
+                _text != null ? '$_text' : '',
                 style: Theme.of(context).textTheme.display1,
                 textAlign: TextAlign.left,
               ),
