@@ -119,24 +119,13 @@ class HomePageState extends State<HomePage> {
 
   List<Widget> _generateCards() {
     //planetCard에서 4개 가져오기
-//    List<PlanetCard> planetCard = demoPlanetCards;
     List<PlanetCard> planetCard = demoPlanetCards.sublist(CARD_START_NUM, CARD_START_NUM + CARDS_NUM);
-//    print("lenght::${demoPlanetCards.length}");
-//    planetCard = planetCard.sublist(0,4);
-//    print("demo: ${demoPlanetCards.length}, planet: ${planetCard.length}");
-//     List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
-//     planetCard = demoPlanetCards.sublist(5,7);
 
-    //FIXME: sublist cards
-//    List<PlanetCard> planetCard = demoPlanetCards;
     //margin값 설정하기
     for(int i = 0; i<CARDS_NUM; i++){
       planetCard[i].topMargin = ((i+10)*10).toDouble();
     }
     List<Widget> cardList = new List();
-
-//    cardList.add(new DraggableCard(child: FlutterLogo(size:128)));
-//    return cardList;
 
     //card 4개 보여주기
     for (int x = 0; x < CARDS_NUM; x++) {
@@ -147,7 +136,7 @@ class HomePageState extends State<HomePage> {
           //TODO: DraggableCard로 바꿔? child Card인데..
           child: Dismissible(
             key: ValueKey(x),
-            direction: DismissDirection.horizontal,
+            direction: coin.dir(_current.coin[0], _current.coin[1]),
             background: Container(
               child: Padding(
                 padding: EdgeInsets.only(right: 150),
@@ -164,11 +153,14 @@ class HomePageState extends State<HomePage> {
               direction == DismissDirection.endToStart? dir = 0 : dir = 1;
               //TODO: 임시로 팝업 뜨는거만 확인
               // COIN은 여기서
-
+              if(dir == 1) coin.use(_current.coin[0]);
+              else coin.use(_current.coin[1]);
 //              endingPopup
 
               setState(() {
+
                 envTotalDemo.effect(_current.envStatus[dir]);
+
                 print("===========================================sp:${envTotalDemo.species},sea:${envTotalDemo.seaLevel},ozo:${envTotalDemo.ozone},temp:${envTotalDemo.temper}");
                 removeCards(x);
 
