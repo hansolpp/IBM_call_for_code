@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tinder_swipe_cards/endings.dart';
 import 'package:tinder_swipe_cards/status.dart';
@@ -159,13 +161,16 @@ class HomePageState extends State<HomePage> {
 
                 //TODO: 팝업 테스트
                 List<EndingCard> enableEndings = envTotalDemo.getEnableEndings();
-                print("LENGTH: ${enableEndings.length}");
+//                print("LENGTH: ${enableEndings.length}");
                 if(enableEndings.isNotEmpty){
+                  //조건을 만족하는 엔딩 중 랜덤으로 고르기
+                  int idx = new Random().nextInt(enableEndings.length);
+//                  print("leng: ${enableEndings.length}, idx: $idx");
                   showDialog(
                     context: context,
                     //TODO: 알람 내용 바꾸기
                     //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
-                    builder: (_) => EndingPopup(endingCard: enableEndings[0],),
+                    builder: (_) => EndingPopup(endingCard: enableEndings[idx],),
                     barrierDismissible: false,
                   );
                 }

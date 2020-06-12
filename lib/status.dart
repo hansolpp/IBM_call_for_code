@@ -97,8 +97,8 @@ class EnvTotalDemo {
   /// 엔딩을 낼 수 있는 상태인지 체크
   bool isOkToEnd(EndingCard ending){
     EnvStatus _endingEnv = ending.envStatus;
-    print("ending text: ${ending.cardText}");
-    print("species: ${_isOk(_endingEnv, Status.species)}");
+//    print("ending text: ${ending.cardText}");
+//    print("species: ${_isOk(_endingEnv, Status.species)}");
 //    print("seaLevel: ${_isOk(_endingEnv, Status.seaLevel)}");
 //    print("ozone: ${_isOk(_endingEnv, Status.ozone)}");
 //    print("temper: ${_isOk(_endingEnv, Status.temper)}");

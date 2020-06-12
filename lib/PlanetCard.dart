@@ -52,11 +52,11 @@ final List < PlanetCard > demoPlanetCards = [
      ],
   ),
   new PlanetCard(
-    cardTitle: "해수면 -5 / 오존 +1, 기온 +1",
+    cardTitle: "해수면 +5 / 오존 +1, 기온 +1",
     cardText: "변화량 만드는거 레이아웃으로 만들어야겠다",
     cardImage: "assets/photo_2.jpg",
      envStatus: [
-       EnvStatus(seaLevel: -5),
+       EnvStatus(seaLevel: 5),
        EnvStatus(ozone: 1, temper: 1),
      ],
   ),
