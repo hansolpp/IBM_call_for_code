@@ -57,6 +57,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           setState(() {
             _stringIndex = _stringIndex == null ? 0 : _stringIndex + 1;
             if(_stringIndex == 3){
+              //FIXME: Navigator.push대신 그냥 route로 바꾸기
+//              Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (_) => false);
+//              Navigator.pushNamed(context, '/HomePage');
+//              Navigator.pushReplacementNamed(context, '/HomePage');
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HomePage()),

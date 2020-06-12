@@ -19,14 +19,18 @@ class MyApp extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        initialRoute: '/',
         routes: <String, WidgetBuilder>{
-          '/cardDetails': (BuildContext context) {
+          '/': (context) => Intro(),
+/*          '/cardDetails': (BuildContext context) {
             // return new CardDetails();
-          }
+          },*/
+//          '/HomePage' : (context) => HomePage(),
         },
+    );
         //home: HomePage());
         //home: MyHomePage());
-        home: Intro());
+//        home: Intro());
   }
 }
 
@@ -66,6 +70,10 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+        appBar: AppBar(
+          title: Text("N년째 M계절"),
+          backgroundColor: Colors.purple,
+        ),
 
       body: Stack(
         children: <Widget>[
@@ -257,3 +265,4 @@ class _CustomCardState extends State<CustomCard> {
         ));
   }
 }
+
