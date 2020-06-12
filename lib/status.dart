@@ -109,7 +109,6 @@ class EnvTotalDemo {
         _isOk(_endingEnv, Status.temper);
     }
 
-
     ///가능한 엔딩 리스트를 구한다
   List<EndingCard> getEnableEndings(){
     List<EndingCard> enableEndings =
