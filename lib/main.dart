@@ -145,6 +145,7 @@ class HomePageState extends State<HomePage> {
             secondaryBackground: Container(color: Colors.green),
 //            crossAxisEndOffset: 1,
             onDismissed: (direction){
+              //TODO: add code here to do something when card dissapers
               int dir;
               direction == DismissDirection.endToStart? dir = 0 : dir = 1;
               //TODO: 임시로 팝업 뜨는거만 확인
