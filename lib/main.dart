@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tinder_swipe_cards/endings.dart';
 import 'package:tinder_swipe_cards/status.dart';
@@ -70,15 +71,91 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: AppBar(
-          title: Text("N년째 M계절"),
-          backgroundColor: Colors.purple,
+
+      body: Container(
+        color: Colors.amber,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center, // 주 축 기준 중앙
+//          mainAxisAlignment: MainAxisAlignment.stretch,
+          children: <Widget>[
+            /// 상단바
+            Container(
+              color: Colors.green,
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text("1st Spring"),
+              )
+            ),
+            //stack container
+            Expanded(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                        child: RaisedButton(
+                          child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
+                          onPressed: () {
+                            setState(() {
+                              CARD_START_NUM += CARDS_NUM;
+                              cardList = _generateCards();
+                            });
+                          },
+                        ),
+                    ),  //button
+                    Container(
+//                      alignment: Alignment.topCenter,
+                      //TODO: child draggablecard로 바꾸기
+//            child: Stack(alignment: Alignment.center, children: cardList),
+                      child: Stack(alignment: Alignment.center, children:  cardList),
+                    ),// Card Stack
+                  ],
+                ),
+            ),
+            ),
+            // bottom container
+            Container(
+              height: 100,
+              color: Colors.cyanAccent,
+              child: Align(
+              alignment: Alignment.topCenter,
+                child: Row(
+//                  width: MediaQuery.of(context).size.width,
+//                  mainAxisSize: MediaQuery.of(context).size.width,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text("icon1"),
+                    Text("icon2"),
+                    Text("icon3"),
+                ],
+              ),
+              ),
+            ),
+          ],
         ),
 
-      body: Stack(
-        children: <Widget>[
+      ),
+//        appBar: AppBar(
+//          title: Text("N년째 M계절"),
+//          backgroundColor: Colors.purple,
+//        ),
 
-          Container(
+      /*body: Container(
+        color: Colors.amber,
+        child: Column(
+          children: <Widget>[
+            //stack 들어가는 컨테이너
+            Container(
+              child:
+              Stack(
+                  children: <Widget>[
+
+              *//*Container(
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
@@ -100,27 +177,30 @@ class HomePageState extends State<HomePage> {
                 },
               )
           ),
+*//*
+              Container(alignment: Alignment.center,
+                  child: RaisedButton(
+                    child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
+                    onPressed: () {
+                      setState(() {
+                        CARD_START_NUM += CARDS_NUM;
+                        cardList = _generateCards();
+                      });
+                    },
+                  )
+              ),
 
-          Container(alignment: Alignment.center,
-              child: RaisedButton(
-                child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
-                onPressed: () {
-                    setState(() {
-                      CARD_START_NUM += CARDS_NUM;
-                      cardList = _generateCards();
-                  });
-                },
-              )
-          ),
-
-          Container(
-            //TODO: child draggablecard로 바꾸기
+              Container(
+                //TODO: child draggablecard로 바꾸기
 //            child: Stack(alignment: Alignment.center, children: cardList),
-            child: Stack(alignment: Alignment.center, children:  cardList),
-          ),
-        ],
-      )
-    );
+                child: Stack(alignment: Alignment.center, children:  cardList),
+              ),
+
+            ],
+            ),
+        ),
+    ],*/
+      );
   }
 
   List<Widget> _generateCards() {
@@ -135,7 +215,7 @@ class HomePageState extends State<HomePage> {
 
     //margin값 설정하기
     for(int i = 0; i<CARDS_NUM; i++){
-      planetCard[i].topMargin = ((i+10)*10).toDouble();
+      planetCard[i].topMargin = ((i)*10+50).toDouble();
     }
 
     ///TODO: 임시 test func
