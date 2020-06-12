@@ -88,7 +88,7 @@ class _WatsonState extends State<Watson> {
               //  child: Icon(Icons.all_inclusive),
               //),
               Text(
-                _text != null ? '$_text' : '플레이하고 싶다면 \'자시게 게임 시작\'을 눌러주세요',
+                _text != null ? '$_text' : '똑똑',
                 style: TextStyle(
                   fontSize: 20,
                 ),
