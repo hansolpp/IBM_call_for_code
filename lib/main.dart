@@ -111,7 +111,6 @@ class HomePageState extends State<HomePage> {
                         ),
                     ),  //button
                     Container(
-                      //TODO: card 크기 일정하게 고정
                       child: Stack(alignment: Alignment.center, children:  cardList),
                     ),// Card Stack
                   ],
@@ -119,22 +118,34 @@ class HomePageState extends State<HomePage> {
             ),
             ),
             // bottom container
-            Container(
+            Container(  //TODO: 다 절대값으로 해놨다. 상대값으로 바꿀것...
               height: 100,
               color: Colors.cyanAccent,
-              child: Align(
-              alignment: Alignment.topCenter,
-                child: Row(
-//                  width: MediaQuery.of(context).size.width,
-//                  mainAxisSize: MediaQuery.of(context).size.width,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text("icon1"),
-                    Text("icon2"),
-                    Text("icon3"),
+              alignment: Alignment.center,
+              child: Stack(
+                children: <Widget>[
+                  Container(  //background
+                    color: Colors.red,
+                    alignment: Alignment.center,
+                    height: 50,
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                  ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(left: 10, right: 10),
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Image.asset("assets/icons/comp_soso.jpg", width: 80, height: 80, fit: BoxFit.fill),
+                      Image.asset("assets/icons/coin.png", width: 70, height: 70, fit: BoxFit.fill),
+                      Image.asset("assets/icons/env_soso.jpg", width: 80, height: 80, fit: BoxFit.fill),
+                    ],
+                  ),
+                ),
                 ],
-              ),
-              ),
+//              ),
+      ),
             ),
           ],
         ),
