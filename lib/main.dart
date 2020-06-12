@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tinder_swipe_cards/endings.dart';
 import 'package:tinder_swipe_cards/status.dart';
+import 'Coin.dart';
 import 'Intro.dart';
 import 'PlanetCard.dart';
 import 'CardDetails.dart';
@@ -43,8 +44,10 @@ class HomePageState extends State<HomePage> {
 
   //전역변수
   List<Widget> cardList = new List();
+
   int CARD_START_NUM = 0;
   int CARDS_NUM = 4;
+  Coin coin = new Coin();
 
   void removeCards(index) {
     setState(() {
@@ -76,7 +79,7 @@ class HomePageState extends State<HomePage> {
               alignment: Alignment(0.0, -1.0),
               child: RaisedButton(
                 shape: RoundedRectangleBorder(),
-                child: Text('상태창 어디까지 길어지려나',
+                child: Text('상태창 어디까지 길어지려나 \$ ${coin.coin}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -131,6 +134,10 @@ class HomePageState extends State<HomePage> {
       planetCard[i].topMargin = ((i+10)*10).toDouble();
     }
     List<Widget> cardList = new List();
+
+//    cardList.add(new DraggableCard(child: FlutterLogo(size:128)));
+//    return cardList;
+
     //card 4개 보여주기
     for (int x = 0; x < CARDS_NUM; x++) {
       PlanetCard _current = planetCard[x];
@@ -141,13 +148,22 @@ class HomePageState extends State<HomePage> {
           child: Dismissible(
             key: ValueKey(x),
             direction: DismissDirection.horizontal,
-            background: Container(child: Text("${_current.cardTitle}"), color: Colors.red),
+            background: Container(
+              child: Padding(
+                padding: EdgeInsets.only(right: 150),
+                child: Container(
+                  child: Text("${_current.cardTitle}"),
+                ),
+              ),
+                color: Colors.red
+            ),
             secondaryBackground: Container(color: Colors.green),
 //            crossAxisEndOffset: 1,
             onDismissed: (direction){
               int dir;
               direction == DismissDirection.endToStart? dir = 0 : dir = 1;
               //TODO: 임시로 팝업 뜨는거만 확인
+              // COIN은 여기서
 
 //              endingPopup
 
