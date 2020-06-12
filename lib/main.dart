@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'Intro.dart';
 import 'PlanetCard.dart';
 import 'CardDetails.dart';
-import 'PlanetCard.dart';
-import 'PlanetCard.dart';
-import 'PlanetCard.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
             // return new CardDetails();
           }
         },
-        home: HomePage());
+        //home: HomePage());
+        //home: MyHomePage());
+        home: Intro());
   }
 }
 
@@ -33,7 +35,10 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  //전역변수
   List<Widget> cardList = new List();
+  int CARD_START_NUM = 0;
+  int CARDS_NUM = 4;
 
   void removeCards(index) {
     setState(() {
@@ -46,28 +51,53 @@ class HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     cardList = _generateCards();
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text("임기 10년 째"),
-        backgroundColor: Colors.purple,
-      ),
+
       body: Stack(
         children: <Widget>[
+
+          Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              alignment: Alignment(0.0, -1.0),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(),
+                child: Text('상태창 어디까지 길어지려나',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+
+                  });
+                },
+              )
+          ),
+
           Container(alignment: Alignment.center,
               child: RaisedButton(
                 child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
                 onPressed: () {
                     setState(() {
+                      CARD_START_NUM += CARDS_NUM;
                       cardList = _generateCards();
                   });
                 },
               )
           ),
+
           Container(
             child: Stack(alignment: Alignment.center, children: cardList),
           ),
@@ -84,8 +114,7 @@ class HomePageState extends State<HomePage> {
     //화면에 보여줄 카드 4개 선택
     //planetCard에서 4개 가져오기
 //    List<PlanetCard> planetCard = demoPlanetCards;
-    const int CARDS_NUM = 4;
-    List<PlanetCard> planetCard = demoPlanetCards.sublist(0,CARDS_NUM);
+    List<PlanetCard> planetCard = demoPlanetCards.sublist(CARD_START_NUM, CARD_START_NUM + CARDS_NUM);
 //    print("lenght::${demoPlanetCards.length}");
 //    planetCard = planetCard.sublist(0,4);
 //    print("demo: ${demoPlanetCards.length}, planet: ${planetCard.length}");
@@ -96,7 +125,7 @@ class HomePageState extends State<HomePage> {
 //    List<PlanetCard> planetCard = demoPlanetCards;
     //margin값 설정하기
     for(int i = 0; i<CARDS_NUM; i++){
-      planetCard[i].topMargin = ((i+5)*10).toDouble();
+      planetCard[i].topMargin = ((i+10)*10).toDouble();
     }
 
     //TODO: 여기서 생성하는 cardList를 PlanetCard에 있는 PlanetCards로 바꾸기
