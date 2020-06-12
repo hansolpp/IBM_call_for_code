@@ -125,7 +125,9 @@ class HomePageState extends State<HomePage> {
                 if(enableEndings.isNotEmpty){
                   showDialog(
                     context: context,
-                    builder: (_) => endingPopup,
+                    //TODO: 알람 내용 바꾸기
+                    //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
+                    builder: (_) => EndingPopup(endingCard: enableEndings[0],),
                     barrierDismissible: false,
                   );
                 }
