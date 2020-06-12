@@ -247,9 +247,15 @@ class HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20.0)
               ),
               child: Padding(
-                padding: EdgeInsets.only(top: 20, left: 20, right: 100),
+                padding: EdgeInsets.only(top: 40, left: 20, right: 140),
                 child: Container(
-                  child: Text("${_current.cardTitle}", style: TextStyle(fontSize: 18, color: Color.fromARGB(250, 18, 131, 142))),
+                  child: Text("${_current.cardTitle}",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(250, 18, 131, 142),
+                          fontWeight: FontWeight.bold
+                      )
+                  ),
                 ),
               ),
             ),
@@ -259,9 +265,16 @@ class HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20.0)
               ),
               child: Padding(
-                padding: EdgeInsets.only(top: 20, left: 100, right: 20),
+                padding: EdgeInsets.only(top: 40, left: 140, right: 20),
                 child: Container(
-                  child: Text("${_current.cardTitle}", textAlign: TextAlign.right, style: TextStyle(fontSize: 18, color: Colors.white)),
+                  child: Text("${_current.cardTitle}",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      )
+                  ),
                 ),
               ),
             ),
@@ -385,7 +398,11 @@ class _CustomCardState extends State<CustomCard> {
 //                    ),
                     Text(_planetCard.cardText,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, color: Color.fromARGB(250, 18, 131, 142)),
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(250, 18, 131, 142),
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                   ],
                 )
