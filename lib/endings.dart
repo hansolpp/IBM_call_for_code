@@ -48,6 +48,8 @@ final List<EndingCard> endingList = [
 
 
 class EndingCard {
+
+
   String cardTitle;
   String cardText;
   String cardImage;
@@ -83,9 +85,7 @@ class EndingPopup extends StatefulWidget {
 }
 
 class _EndingPopupState extends State<EndingPopup> {
-
   final EndingCard _endingCard;
-
   _EndingPopupState(this._endingCard);
 
   @override

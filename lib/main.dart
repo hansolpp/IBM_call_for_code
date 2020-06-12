@@ -130,9 +130,17 @@ class HomePageState extends State<HomePage> {
     for(int i = 0; i<CARDS_NUM; i++){
       planetCard[i].topMargin = ((i+10)*10).toDouble();
     }
+
+    ///TODO: 임시 test func
+    func(){
+      print("hello world!");
+      print(planetCard[0].seasons);
+    }
+
     List<Widget> cardList = new List();
     //card 4개 보여주기
     for (int x = 0; x < CARDS_NUM; x++) {
+//      func();
       PlanetCard _current = planetCard[x];
       cardList.add(
         Positioned(
@@ -141,8 +149,8 @@ class HomePageState extends State<HomePage> {
           child: Dismissible(
             key: ValueKey(x),
             direction: DismissDirection.horizontal,
-            background: Container(child: Text("${_current.cardTitle}"), color: Colors.red),
-            secondaryBackground: Container(color: Colors.green),
+            background: Container(child: Text("${_current.selectText[0]}"), color: Colors.red),
+            secondaryBackground: Container(child: Text("${_current.selectText[1]}"), color: Colors.green),
 //            crossAxisEndOffset: 1,
             onDismissed: (direction){
               //TODO: add code here to do something when card dissapers

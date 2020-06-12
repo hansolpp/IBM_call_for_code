@@ -37,6 +37,14 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   ];
   String get _currentString => _kStrings[_stringIndex % _kStrings.length];
 
+
+//  //TODO: 글자 duration 수정
+//  Duration setDuration(){
+//
+//    Duration.
+//  }
+
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);

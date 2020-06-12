@@ -14,6 +14,10 @@ final List< List < PlanetCard > > demoPlanetCards = [
       EnvStatus(species: 5),
       EnvStatus(ozone: 5),
     ],
+    selectText: [
+      "왼쪽 선택지",
+      "오른쪽 선택지"
+    ],
     seasons: Seasons.SPRING,
     ),
     new PlanetCard(
@@ -23,6 +27,10 @@ final List< List < PlanetCard > > demoPlanetCards = [
       envStatus: [
         EnvStatus(species: 3),
         EnvStatus(species: -3),
+      ],
+      selectText: [
+        "왼쪽 선택지",
+        "오른쪽 선택지"
       ],
       seasons: Seasons.SPRING,
     ),
@@ -38,6 +46,10 @@ final List< List < PlanetCard > > demoPlanetCards = [
         EnvStatus(species: -3, seaLevel: 5),
         EnvStatus(seaLevel: -5, ozone: 2, temper: 10),
       ],
+      selectText: [
+        "왼쪽 선택지",
+        "오른쪽 선택지"
+      ],
       seasons: Seasons.SUMMER,
     ),
     new PlanetCard(
@@ -47,6 +59,10 @@ final List< List < PlanetCard > > demoPlanetCards = [
       envStatus: [
         EnvStatus(seaLevel: 5),
         EnvStatus(ozone: 1, temper: 1),
+      ],
+      selectText: [
+        "왼쪽 선택지",
+        "오른쪽 선택지"
       ],
       seasons: Seasons.SUMMER,
     ),
@@ -62,6 +78,10 @@ final List< List < PlanetCard > > demoPlanetCards = [
         EnvStatus(temper: 5),
         EnvStatus(temper: 3),
       ],
+      selectText: [
+        "왼쪽 선택지",
+        "오른쪽 선택지"
+      ],
       seasons: Seasons.FALL,
     ),
     new PlanetCard(
@@ -71,6 +91,10 @@ final List< List < PlanetCard > > demoPlanetCards = [
       envStatus: [
         EnvStatus(species: -10),
         EnvStatus(temper: 10),
+      ],
+      selectText: [
+        "왼쪽 선택지",
+        "오른쪽 선택지"
       ],
     ),
   ],
@@ -85,6 +109,10 @@ final List< List < PlanetCard > > demoPlanetCards = [
         EnvStatus(species: -10, seaLevel: -10, temper: -10, ozone: -10),
         EnvStatus(species: 10, seaLevel: 10, temper: 10, ozone: 10),
       ],
+      selectText: [
+        "왼쪽 선택지",
+        "오른쪽 선택지"
+      ],
       seasons: Seasons.WINTER,
     ),
     new PlanetCard(
@@ -95,6 +123,11 @@ final List< List < PlanetCard > > demoPlanetCards = [
         EnvStatus(),
         EnvStatus(species: 5, seaLevel: 5, ozone: 5, temper: 5),
       ],
+      selectText: [
+        "왼쪽 선택지",
+        "오른쪽 선택지"
+      ],
+      seasons: Seasons.WINTER,
     ),
   ],
 ];
@@ -108,9 +141,9 @@ class PlanetCard {
   String cardTitle;
   String cardText;
   String cardImage;
+  List<String> selectText;
   double _topMargin;
   Seasons seasons;  //계절. 나중에 SQL 넣으면 질의하기 쉬우라고 넣어놓음
-
   //TODO: add Env
   final List<EnvStatus> envStatus;
 
@@ -126,6 +159,7 @@ class PlanetCard {
     this.cardImage,
     this.envStatus,
     this.seasons,
+    this.selectText,
     // this.topMargin
   });
   // }
