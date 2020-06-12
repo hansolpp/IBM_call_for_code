@@ -1,13 +1,15 @@
 import 'dart:math';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tinder_swipe_cards/endings.dart';
 import 'package:tinder_swipe_cards/status.dart';
+import 'Coin.dart';
 import 'Intro.dart';
 import 'PlanetCard.dart';
 import 'CardDetails.dart';
 import 'cards.dart';
 import 'package:flutter/services.dart';
+import 'popup.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,15 +20,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: <String, WidgetBuilder>{
-          '/cardDetails': (BuildContext context) {
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (context) => Intro(),
+/*          '/cardDetails': (BuildContext context) {
             // return new CardDetails();
-          }
-        },
-        //home: HomePage());
-        //home: MyHomePage());
-        home: Intro());
+          },*/
+//          '/HomePage' : (context) => HomePage(),
+      },
+    );
+    //home: HomePage());
+    //home: MyHomePage());
+//        home: Intro());
   }
 }
 
@@ -47,6 +53,9 @@ class HomePageState extends State<HomePage> {
   List<Widget> cardList = new List();
   int CARD_START_NUM = 0;
   int CARDS_NUM = 4;
+  Coin coin = new Coin();
+  final List<String> _currentSeason = ["Spring", "Summer", "Fall", "Winter"];
+  int _currentIdx = -1;
 
   void removeCards(index) {
     setState(() {
@@ -60,65 +69,151 @@ class HomePageState extends State<HomePage> {
     super.initState();
     cardList = _generateCards();
     SystemChrome.setEnabledSystemUIOverlays([]);
-
   }
 
   @override
   Widget build(BuildContext context) {
+
+
     // TODO: implement build
     return Scaffold(
+      /// 연수 상단바 + 선정 상단바
+      body: Container(
+        color: Colors.amber[50],
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center, // 주 축 기준 중앙
+          children: <Widget>[
+            /// 상단바
+            Container(
+                color: Colors.amber[50],
+                width: MediaQuery.of(context).size.width,
+                height: 150,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  //TODO: 카드 상태 따라 글자 바꾸기
+                  child: Text("${_currentIdx~/4 + 1}st ${_currentSeason[_currentIdx%4]}",
+                      style: TextStyle(
+                        fontSize: 56,
+                        color: Color.fromARGB(250, 18, 131, 142),
+                      )),
+                )
+            ),
 
-      body: Stack(
-        children: <Widget>[
 
-          Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              alignment: Alignment(0.0, -1.0),
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(),
-                child: Text('상태창 어디까지 길어지려나',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onPressed: () {
-                  setState(() {
+            //stack container
+            Expanded(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(),
+                        color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 80, left: 30, right: 30, bottom: 80),
+                          child: Container(
+                            child: Text('장관님!\n현재 기후변화 평가는\n00입니다.\n앞으로도 수고해주세요^^',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.lightBlue[900],
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          if(coin.coin < 0) {
+                            setState(() {
+                              coin = new Coin();
+                              envTotalDemo.reset();
+                              CARD_START_NUM = 0;
+                              cardList = _generateCards();
+                              _currentIdx = 0;
+                            });
+                          }
+                          else {
+                            setState(() {
+                              CARD_START_NUM += CARDS_NUM;
+                              cardList = _generateCards();
 
-                  });
-                },
-              )
-          ),
+                            });
+                          }
+                        },
+                      ),
+                    ),
 
-          Container(alignment: Alignment.center,
-              child: RaisedButton(
-                child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
-                onPressed: () {
-                    setState(() {
-                      CARD_START_NUM += CARDS_NUM;
-                      cardList = _generateCards();
-                  });
-                },
-              )
-          ),
-
-          Container(
-            //TODO: child draggablecard로 바꾸기
+                    Container(
+                      //TODO: child draggablecard로 바꾸기
 //            child: Stack(alignment: Alignment.center, children: cardList),
-            child: Stack(alignment: Alignment.center, children:  cardList),
-          ),
-        ],
-      )
-    );
+                      child: Stack(alignment: Alignment.center, children:  cardList),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // bottom container
+            Container( //TODO: 다 절대값으로 해놨다. 상대값으로 바꿀것...
+              height: 100,
+              color: Colors.amber[50],
+              alignment: Alignment.center,
+              child: Stack(
+                children: <Widget>[
+                  Container(  //background
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                    height: 50,
+                    margin: EdgeInsets.only(left: 10, right: 10, top:25, bottom: 25),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Image.asset("assets/icons/comp_good.png", width: 80, height: 80, fit: BoxFit.fill),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset("assets/icons/coin.png", width: 70, height: 70, fit: BoxFit.fill),
+                            Text(" ${coin.coin}",
+                            style: TextStyle(fontSize: 40, color: Color.fromARGB(255, 188, 142, 39), fontWeight: FontWeight.bold),
+                            ),
+
+                          ],
+                        ),
+                        Image.asset("assets/icons/env_soso.png", width: 80, height: 80, fit: BoxFit.fill),
+                      ],
+                    ),
+                  ),
+                ],
+//              ),
+              ),
+            ),
+            Container(  //background
+              color: Colors.amber[50],
+              alignment: Alignment.center,
+              height: 20,
+              margin: EdgeInsets.only(left: 10, right: 10, top:25, bottom: 25),
+            ),
+          ],
+        ),
+        ),
+      );
   }
 
   List<Widget> _generateCards() {
     //planetCard에서 계절별로 하나씩 , 총 4개 가져오기
     List<PlanetCard> planetCard = new List();
+    int _cnt = 0;
+    _currentIdx++;
+//    _currentIdx = _cnt;
+
     //spring random
     Random random = new Random();
     for(int i = 3; i>=0; i--){
@@ -126,39 +221,68 @@ class HomePageState extends State<HomePage> {
       planetCard.add(demoPlanetCards[i][idx]);
     }
 
+    //FIXME: sublist cards
     //margin값 설정하기
     for(int i = 0; i<CARDS_NUM; i++){
-      planetCard[i].topMargin = ((i+10)*10).toDouble();
-    }
-
-    ///TODO: 임시 test func
-    func(){
-      print("hello world!");
-      print(planetCard[0].seasons);
+      planetCard[i].topMargin = ((i)*10).toDouble();
     }
 
     List<Widget> cardList = new List();
     //card 4개 보여주기
     for (int x = 0; x < CARDS_NUM; x++) {
-//      func();
       PlanetCard _current = planetCard[x];
       cardList.add(
         Positioned(
           top: _current.topMargin,
-          //TODO: DraggableCard로 바꿔? child Card인데..
           child: Dismissible(
             key: ValueKey(x),
-            direction: DismissDirection.horizontal,
-            background: Container(child: Text("${_current.selectText[0]}"), color: Colors.red),
-            secondaryBackground: Container(child: Text("${_current.selectText[1]}"), color: Colors.green),
+            direction: coin.dir(_current.coin[0], _current.coin[1]),
+            background: Container(
+              decoration: new BoxDecoration(
+                  color: Colors.white, //new Color.fromRGBO(255, 0, 0, 0.0),
+                  borderRadius: BorderRadius.circular(20.0)
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(top: 40, left: 20, right: 140),
+                child: Container(
+                  child: Text("${_current.cardTitle}",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(250, 18, 131, 142),
+                          fontWeight: FontWeight.bold
+                      )
+                  ),
+                ),
+              ),
+            ),
+            secondaryBackground: Container(
+              decoration: new BoxDecoration(
+                  color: Color.fromARGB(250, 18, 131, 142), //new Color.fromRGBO(255, 0, 0, 0.0),
+                  borderRadius: BorderRadius.circular(20.0)
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(top: 40, left: 140, right: 20),
+                child: Container(
+                  child: Text("${_current.cardTitle}",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      )
+                  ),
+                ),
+              ),
+            ),
 //            crossAxisEndOffset: 1,
             onDismissed: (direction){
               //TODO: add code here to do something when card dissapers
               int dir;
               direction == DismissDirection.endToStart? dir = 0 : dir = 1;
               //TODO: 임시로 팝업 뜨는거만 확인
-
-//              endingPopup
+              // COIN은 여기서
+              if(dir == 1) coin.use(_current.coin[0]);
+              else coin.use(_current.coin[1]);
 
               setState(() {
                 envTotalDemo.effect(_current.envStatus[dir]);
@@ -177,6 +301,23 @@ class HomePageState extends State<HomePage> {
                     //TODO: 알람 내용 바꾸기
                     //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
                     builder: (_) => EndingPopup(endingCard: enableEndings[idx],),
+                    barrierDismissible: false,
+                  );
+                }
+                _cnt++;
+//                if(_currentIdx == 0) _currentIdx++;
+                if((_currentIdx+1) % 4 != 0)_currentIdx ++;
+//                _cnt > 3 ? _currentIdx : _currentIdx = _cnt;
+//                print("==================currentIdx: $_currentIdx");
+
+
+                print("CNT: ${_cnt}");
+                if(_cnt == CARDS_NUM && coin.coin < 0) {
+                  showDialog(
+                    context: context,
+                    //TODO: 알람 내용 바꾸기
+                    //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
+                    builder: (_) => Year_Popup(),
                     barrierDismissible: false,
                   );
                 }
@@ -222,7 +363,7 @@ class _CustomCardState extends State<CustomCard> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Color.fromARGB(250, 112, 19, 179),
+        color: Colors.white,
         child: Column(
           children: <Widget>[
             Container(
@@ -242,14 +383,22 @@ class _CustomCardState extends State<CustomCard> {
             ),
             Container(
                 width: 320,
+                height: 120,
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10,right: 10),
                 child: Column(
+                  //TODO: 크기 고정값
                   children: <Widget> [
-                    Text(_planetCard.cardTitle,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.amber),
-                    ),
+                    Text('hello world', style: TextStyle(fontSize: 20, color: Colors.white)),
+//                    Text(_planetCard.cardTitle,
+//                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.amber[50]),
+//                    ),
                     Text(_planetCard.cardText,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(250, 18, 131, 142),
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                   ],
                 )

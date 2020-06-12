@@ -38,13 +38,6 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String get _currentString => _kStrings[_stringIndex % _kStrings.length];
 
 
-//  //TODO: 글자 duration 수정
-//  Duration setDuration(){
-//
-//    Duration.
-//  }
-
-
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -52,22 +45,28 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       fontFamily: 'Courier New',
       color: theme.primaryColor,
     );
+
     return new Scaffold(
       floatingActionButton: new FloatingActionButton(
         child: new Icon(Icons.navigate_next),
         onPressed: () async {
           AnimationController controller = new AnimationController(
-            duration: const Duration(milliseconds: 4000),
+            duration: Duration(milliseconds: 4000),
             vsync: this,
           );
           setState(() {
             _stringIndex = _stringIndex == null ? 0 : _stringIndex + 1;
             if(_stringIndex == 3){
+              //FIXME: Navigator.push대신 그냥 route로 바꾸기
+//              Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (_) => false);
+//              Navigator.pushNamed(context, '/HomePage');
+//              Navigator.pushReplacementNamed(context, '/HomePage');
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HomePage()),
               );
             }
+            controller.duration = Duration(milliseconds: _kStrings[_stringIndex].length*50);
             _characterCount = new StepTween(begin: 0, end: _currentString.length)
                 .animate(new CurvedAnimation(parent: controller, curve: Curves.easeIn));
           });
