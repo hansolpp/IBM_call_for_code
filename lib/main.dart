@@ -104,6 +104,8 @@ class HomePageState extends State<HomePage> {
           child: Dismissible(
             key: ValueKey(x),
             direction: DismissDirection.horizontal,
+            background: Container(child: Text("${_current.cardTitle}"), color: Colors.red),
+            secondaryBackground: Container(color: Colors.green),
 //            crossAxisEndOffset: 1,
             onDismissed: (direction){
               int dir;
@@ -114,11 +116,13 @@ class HomePageState extends State<HomePage> {
 
               setState(() {
                 envTotalDemo.effect(_current.envStatus[dir]);
-                print("sp:${envTotalDemo.species},sea:${envTotalDemo.seaLevel},ozo:${envTotalDemo.ozone},temp:${envTotalDemo.temper}");
+                print("===========================================sp:${envTotalDemo.species},sea:${envTotalDemo.seaLevel},ozo:${envTotalDemo.ozone},temp:${envTotalDemo.temper}");
                 removeCards(x);
 
-                //팝업 테스트
-                if(envTotalDemo.temper >= 70){
+                //TODO: 팝업 테스트
+                List<EndingCard> enableEndings = envTotalDemo.getEnableEndings();
+                print("LENGTH: ${enableEndings.length}");
+                if(enableEndings.isNotEmpty){
                   showDialog(
                     context: context,
                     builder: (_) => endingPopup,

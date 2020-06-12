@@ -72,7 +72,7 @@ class EnvTotalDemo {
 
   /// 특정 envstatus와 전체 환경변수값을 가져온다
   List<int> _getVal(EnvStatus _env, Status status){
-    EnvTotalDemo _envTotal;
+    EnvTotalDemo _envTotal = new EnvTotalDemo();
     switch(status){
       case Status.species: return [_env.species, _envTotal.species];
       case Status.seaLevel: return [_env.seaLevel, _envTotal.seaLevel];
@@ -96,37 +96,26 @@ class EnvTotalDemo {
 
   /// 엔딩을 낼 수 있는 상태인지 체크
   bool isOkToEnd(EndingCard ending){
-    int _counter = 0;
-    EnvStatus _env = ending.envStatus;
-
-    //species
-    if(_isOk(_env, Status.species)){}
-    //sealevel
-
-    //ozone
-
-    //temper
-
-
-
-//    if(_getVal(_env, Status.species) != EnvStatus.UNDEFINED &&
-//      _env.species
-//    if(_env.species != EnvStatus.UNDEFINED ){
-
-
+    EnvStatus _endingEnv = ending.envStatus;
+    print("ending text: ${ending.cardText}");
+    print("species: ${_isOk(_endingEnv, Status.species)}");
+//    print("seaLevel: ${_isOk(_endingEnv, Status.seaLevel)}");
+//    print("ozone: ${_isOk(_endingEnv, Status.ozone)}");
+//    print("temper: ${_isOk(_endingEnv, Status.temper)}");
+    return
+        _isOk(_endingEnv, Status.species) &&
+        _isOk(_endingEnv, Status.seaLevel) &&
+        _isOk(_endingEnv, Status.ozone) &&
+        _isOk(_endingEnv, Status.temper);
     }
 
+
+    ///가능한 엔딩 리스트를 구한다
+  List<EndingCard> getEnableEndings(){
+    List<EndingCard> enableEndings =
+      endingList.where((ending) => isOkToEnd(ending)).toList();
+    return enableEndings;
   }
-  void availableEndings(){
-//    List<EndingCard> endings =
-//        endingList.where((ending) =>
-//          conditions(ending.envStatus)).toList();
-//        EnvStatus cond = ending.envStatus;
-//            EnvStatus cond = ending.
-//          if(ending.)
-//            ending.cardTitle=="asdf" && ending.cardTitle != "asdf")
-//    ).toList();
-//  }
 
 }
 
