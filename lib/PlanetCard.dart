@@ -20,7 +20,7 @@ final List < PlanetCard > demoPlanetCards = [
     cardTitle: "종 -3, 해수면 +5 / 해수면 -5, 오존 +2, 기온 + 10",
     cardText: "기온이 38도인데 에어컨을 틀까? ( 버티기 / 틀기 )",
     cardImage: "assets/photo_1.jpg",
-    coin: [20, 30],
+    coin: [8, 3],
      envStatus: [
        EnvStatus(species: -3, seaLevel: 5),
        EnvStatus(seaLevel: -5, ozone: 2, temper: 10),
@@ -30,7 +30,7 @@ final List < PlanetCard > demoPlanetCards = [
     cardTitle: "(돈-1000하고싶다) 기온 +5 / 기온 +3",
     cardText: "늦었다. (택시 / 버스). 어딘가 예산도 넣고싶어요",
     cardImage: "assets/photo_2.jpg",
-    coin: [30, 40],
+    coin: [7, 14],
      envStatus: [
        EnvStatus(temper: 5),
        EnvStatus(temper: 3),
@@ -40,7 +40,7 @@ final List < PlanetCard > demoPlanetCards = [
     cardTitle: "모두 -10 / 모두 + 10",
     cardText: "사진이 4개밖에 안들어가요 버그좀 고쳐주세요 (예/ 아니오)",
     cardImage: "assets/photo_4.jpg",
-    coin: [40, 50],
+    coin: [4, 5],
      envStatus: [
        EnvStatus(species: -10, seaLevel: -10, temper: -10, ozone: -10),
        EnvStatus(species: 10, seaLevel: 10, temper: 10, ozone: 10),

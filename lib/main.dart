@@ -74,17 +74,23 @@ class HomePageState extends State<HomePage> {
 
           Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.amber[50],
               ),
               alignment: Alignment(0.0, -1.0),
               child: RaisedButton(
                 shape: RoundedRectangleBorder(),
-                child: Text('상태창 어디까지 길어지려나 \$ ${coin.coin}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                color: Colors.amber[50],
+                child: Padding(
+                  padding: EdgeInsets.only(top: 40),
+                  child: Container(
+                    child: Text('1st Spring ${coin.coin}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.lightBlue[900],
+                        fontSize: 45,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
                 onPressed: () {
@@ -97,23 +103,39 @@ class HomePageState extends State<HomePage> {
 
           Container(alignment: Alignment.center,
               child: RaisedButton(
-                child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
+                shape: RoundedRectangleBorder(),
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 80, left: 30, right: 30, bottom: 80),
+                  child: Container(
+                    child: Text('장관님!\n현재 기후변화 평가는\n00입니다.\n앞으로도 수고해주세요^^',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.lightBlue[900],
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    //TODO: 알람 내용 바꾸기
-                    //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
-                    builder: (_) => Year_Popup(),
-                    barrierDismissible: false,
-                  );
+                  if(coin.coin < 0) {
+                    setState(() {
+                      coin = new Coin();
+                      envTotalDemo.reset();
+                      CARD_START_NUM = 0;
+                      cardList = _generateCards();
+                    });
+                  }
+                  else {
+                    setState(() {
+                      CARD_START_NUM += CARDS_NUM;
+                      cardList = _generateCards();
 
-                  setState(() {
-                    CARD_START_NUM += CARDS_NUM;
-                    cardList = _generateCards();
-
-                  });
+                    });
+                  }
                 },
-              )
+              ),
           ),
 
           Container(
@@ -129,6 +151,7 @@ class HomePageState extends State<HomePage> {
   List<Widget> _generateCards() {
     //planetCard에서 4개 가져오기
     List<PlanetCard> planetCard = demoPlanetCards.sublist(CARD_START_NUM, CARD_START_NUM + CARDS_NUM);
+    int _cnt = 0;
 
     //FIXME: sublist cards
     //margin값 설정하기
@@ -179,6 +202,17 @@ class HomePageState extends State<HomePage> {
                     //TODO: 알람 내용 바꾸기
                     //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
                     builder: (_) => EndingPopup(endingCard: enableEndings[0],),
+                    barrierDismissible: false,
+                  );
+                }
+                _cnt++;
+                print("CNT: ${_cnt}");
+                if(_cnt == CARDS_NUM && coin.coin < 0) {
+                  showDialog(
+                    context: context,
+                    //TODO: 알람 내용 바꾸기
+                    //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
+                    builder: (_) => Year_Popup(),
                     barrierDismissible: false,
                   );
                 }
