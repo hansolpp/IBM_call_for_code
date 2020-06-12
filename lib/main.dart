@@ -55,6 +55,8 @@ class HomePageState extends State<HomePage> {
   int CARD_START_NUM = 0;
   int CARDS_NUM = 4;
   Coin coin = new Coin();
+  final List<String> _currentSeason = ["Spring", "Summer", "Fall", "Winter"];
+  int _currentIdx = -1;
 
   void removeCards(index) {
     setState(() {
@@ -72,6 +74,8 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+
     // TODO: implement build
     return Scaffold(
       /// 연수 상단바 + 선정 상단바
@@ -85,7 +89,6 @@ class HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center, // 주 축 기준 중앙
           children: <Widget>[
-
             /// 상단바
             Container(
               color: Colors.green,
@@ -97,7 +100,7 @@ class HomePageState extends State<HomePage> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 //TODO: 카드 상태 따라 글자 바꾸기
-                child: Text("1st Spring",
+                child: Text("${_currentIdx~/4 + 1}st ${_currentSeason[_currentIdx%4]}",
                     style: TextStyle(
                       fontSize: 56,
                     )),
@@ -142,6 +145,7 @@ class HomePageState extends State<HomePage> {
                               envTotalDemo.reset();
                               CARD_START_NUM = 0;
                               cardList = _generateCards();
+                              _currentIdx = 0;
                             });
                           }
                           else {
@@ -208,6 +212,9 @@ class HomePageState extends State<HomePage> {
     //planetCard에서 계절별로 하나씩 , 총 4개 가져오기
     List<PlanetCard> planetCard = new List();
     int _cnt = 0;
+    _currentIdx++;
+//    _currentIdx = _cnt;
+
     //spring random
     Random random = new Random();
     for(int i = 3; i>=0; i--){
@@ -275,6 +282,12 @@ class HomePageState extends State<HomePage> {
                   );
                 }
                 _cnt++;
+//                if(_currentIdx == 0) _currentIdx++;
+                if((_currentIdx+1) % 4 != 0)_currentIdx ++;
+//                _cnt > 3 ? _currentIdx : _currentIdx = _cnt;
+//                print("==================currentIdx: $_currentIdx");
+
+
                 print("CNT: ${_cnt}");
                 if(_cnt == CARDS_NUM && coin.coin < 0) {
                   showDialog(
