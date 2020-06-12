@@ -7,6 +7,7 @@ import 'PlanetCard.dart';
 import 'CardDetails.dart';
 import 'cards.dart';
 import 'package:flutter/services.dart';
+import 'popup.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,7 +45,6 @@ class HomePageState extends State<HomePage> {
 
   //전역변수
   List<Widget> cardList = new List();
-
   int CARD_START_NUM = 0;
   int CARDS_NUM = 4;
   Coin coin = new Coin();
@@ -99,9 +99,18 @@ class HomePageState extends State<HomePage> {
               child: RaisedButton(
                 child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
                 onPressed: () {
-                    setState(() {
-                      CARD_START_NUM += CARDS_NUM;
-                      cardList = _generateCards();
+                  showDialog(
+                    context: context,
+                    //TODO: 알람 내용 바꾸기
+                    //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
+                    builder: (_) => Year_Popup(),
+                    barrierDismissible: false,
+                  );
+
+                  setState(() {
+                    CARD_START_NUM += CARDS_NUM;
+                    cardList = _generateCards();
+
                   });
                 },
               )
@@ -121,12 +130,12 @@ class HomePageState extends State<HomePage> {
     //planetCard에서 4개 가져오기
     List<PlanetCard> planetCard = demoPlanetCards.sublist(CARD_START_NUM, CARD_START_NUM + CARDS_NUM);
 
+    //FIXME: sublist cards
     //margin값 설정하기
     for(int i = 0; i<CARDS_NUM; i++){
       planetCard[i].topMargin = ((i+10)*10).toDouble();
     }
     List<Widget> cardList = new List();
-
     //card 4개 보여주기
     for (int x = 0; x < CARDS_NUM; x++) {
       PlanetCard _current = planetCard[x];
@@ -138,12 +147,12 @@ class HomePageState extends State<HomePage> {
             key: ValueKey(x),
             direction: coin.dir(_current.coin[0], _current.coin[1]),
             background: Container(
-              child: Padding(
-                padding: EdgeInsets.only(right: 150),
-                child: Container(
-                  child: Text("${_current.cardTitle}"),
+                child: Padding(
+                  padding: EdgeInsets.only(right: 150),
+                  child: Container(
+                    child: Text("${_current.cardTitle}"),
+                  ),
                 ),
-              ),
                 color: Colors.red
             ),
             secondaryBackground: Container(color: Colors.green),
@@ -155,12 +164,9 @@ class HomePageState extends State<HomePage> {
               // COIN은 여기서
               if(dir == 1) coin.use(_current.coin[0]);
               else coin.use(_current.coin[1]);
-//              endingPopup
 
               setState(() {
-
                 envTotalDemo.effect(_current.envStatus[dir]);
-
                 print("===========================================sp:${envTotalDemo.species},sea:${envTotalDemo.seaLevel},ozo:${envTotalDemo.ozone},temp:${envTotalDemo.temper}");
                 removeCards(x);
 
