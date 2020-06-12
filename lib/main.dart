@@ -128,7 +128,7 @@ class HomePageState extends State<HomePage> {
                     color: Colors.red,
                     alignment: Alignment.center,
                     height: 50,
-                    margin: EdgeInsets.only(left: 10, right: 10),
+                    margin: EdgeInsets.only(left: 10, right: 10, top:25, bottom: 25),
                   ),
                 Container(
                   alignment: Alignment.center,
