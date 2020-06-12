@@ -4,6 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'endings.dart';
+
 
 ///Widget들 사실상 아직 사용 안 함
 /// 없애거나 지워도된다
@@ -65,6 +67,67 @@ class EnvTotalDemo {
     this.temper += env.temper;
 //    notifyListeners();
   }
+
+
+
+  /// 특정 envstatus와 전체 환경변수값을 가져온다
+  List<int> _getVal(EnvStatus _env, Status status){
+    EnvTotalDemo _envTotal;
+    switch(status){
+      case Status.species: return [_env.species, _envTotal.species];
+      case Status.seaLevel: return [_env.seaLevel, _envTotal.seaLevel];
+      case Status.ozone: return [_env.ozone, _envTotal.ozone];
+      case Status.temper: return [_env.temper, _envTotal.temper];
+      default: ;
+    }
+    return [-1,-1];  //this code should not be arrived
+  }
+
+  // 환경 변수(species, sealevel...) 가 엔딩 조건에 부합하는지 리턴
+  bool _isOk(EnvStatus _endingEnv, Status status){
+    int _env = _getVal(_endingEnv, status)[0];
+    int _total = _getVal(_endingEnv, status)[1];
+
+    if(_env == EnvStatus.UNDEFINED) return true;
+    if(_env > 0 ) return _total > _env ;
+    else if(_env < 0) return _total < -(_env);
+    return false; //this must not be reached;
+  }
+
+  /// 엔딩을 낼 수 있는 상태인지 체크
+  bool isOkToEnd(EndingCard ending){
+    int _counter = 0;
+    EnvStatus _env = ending.envStatus;
+
+    //species
+    if(_isOk(_env, Status.species)){}
+    //sealevel
+
+    //ozone
+
+    //temper
+
+
+
+//    if(_getVal(_env, Status.species) != EnvStatus.UNDEFINED &&
+//      _env.species
+//    if(_env.species != EnvStatus.UNDEFINED ){
+
+
+    }
+
+  }
+  void availableEndings(){
+//    List<EndingCard> endings =
+//        endingList.where((ending) =>
+//          conditions(ending.envStatus)).toList();
+//        EnvStatus cond = ending.envStatus;
+//            EnvStatus cond = ending.
+//          if(ending.)
+//            ending.cardTitle=="asdf" && ending.cardTitle != "asdf")
+//    ).toList();
+//  }
+
 }
 
 
@@ -78,9 +141,18 @@ class EnvStatus {
   final int ozone;
   final int temper;
   static const int defaultVal = 0;
+  static const int UNDEFINED = 987654321;
 
   /// Named Option Parma으로 넣었는데
   /// 나중에 데이터 넣기 너무 귀찮으면 그냥 Position Optional로 바꿀래...
   /// https://stackoverflow.com/questions/52449508/constructor-optional-params
   EnvStatus({this.species = defaultVal, this.seaLevel = defaultVal, this.ozone = defaultVal, this.temper =defaultVal});
+  EnvStatus.ending({this.species = UNDEFINED, this.seaLevel = UNDEFINED, this.ozone = UNDEFINED, this.temper = UNDEFINED});
+}
+
+enum Status {
+  species,
+  seaLevel,
+  ozone,
+  temper
 }

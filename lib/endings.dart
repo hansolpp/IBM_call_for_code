@@ -10,37 +10,37 @@ final List<EndingCard> endingList = [
     cardTitle: "species 70",
     cardText: "모기떼의 습격",
     cardImage: "assets/photo_8.png",
-    envStatus: EnvStatus(species: EnvStatus.defaultVal),
+    envStatus: EnvStatus.ending(species: EnvStatus.defaultVal),
   ),
   new EndingCard(
     cardTitle: "sealevel 70",
     cardText: "아틸란티스",
     cardImage: "assets/photo_7.png",
-    envStatus: EnvStatus(seaLevel: EnvStatus.defaultVal),
+    envStatus: EnvStatus.ending(seaLevel: EnvStatus.defaultVal),
   ),
   new EndingCard(
     cardTitle: "ozone 70",
     cardText: "zx파괴_오존xz",
     cardImage: "assets/photo_6.png",
-    envStatus: EnvStatus(ozone: EnvStatus.defaultVal),
+    envStatus: EnvStatus.ending(ozone: EnvStatus.defaultVal),
   ),
   new EndingCard(
     cardTitle: "temper 70",
     cardText: "불타죽음",
     cardImage: "assets/photo_5.jpg",
-    envStatus: EnvStatus(temper: EnvStatus.defaultVal),
+    envStatus: EnvStatus.ending(temper: EnvStatus.defaultVal),
   ),
   new EndingCard(
     cardTitle: "species 70, temper <= 40",
     cardText: "빙하기",
     cardImage: "assets/photo_8.png",
-    envStatus: EnvStatus(species: EnvStatus.defaultVal, temper: -40),
+    envStatus: EnvStatus.ending(species: EnvStatus.defaultVal, temper: -40),
   ),
   new EndingCard(
     cardTitle: "sealevel 70, ozone >= 60",
     cardText: "모히또에서 몰디브한잔",
     cardImage: "assets/photo_1.png",
-    envStatus: EnvStatus(seaLevel: EnvStatus.defaultVal, ozone: 60),
+    envStatus: EnvStatus.ending(seaLevel: EnvStatus.defaultVal, ozone: 60),
   ),
 ];
 
@@ -49,8 +49,12 @@ class EndingCard {
   String cardTitle;
   String cardText;
   String cardImage;
-  static const int defultVal = 70;
-  final EnvStatus envStatus;  // 엔딩 조건
+  /// 엔딩을 보는 기본 조건
+  static const int defaultVal = 70;
+  /// 엔딩 조건
+  /// 값이 + 인 경우 : 환경값이 엔딩값 '이상'인 경우 엔딩
+  /// 값이 - 인 경우 : 환경값이 엔딩값 '이하'인 경우 엔딩
+  final EnvStatus envStatus;
 
   EndingCard({
     this.cardTitle,
