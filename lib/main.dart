@@ -71,14 +71,12 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-
       body: Container(
         color: Colors.amber,
         width: MediaQuery.of(context).size.width,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center, // 주 축 기준 중앙
-//          mainAxisAlignment: MainAxisAlignment.stretch,
           children: <Widget>[
             /// 상단바
             Container(
@@ -87,7 +85,11 @@ class HomePageState extends State<HomePage> {
               height: 100,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: Text("1st Spring"),
+                //TODO: 카드 상태 따라 글자 바꾸기
+                child: Text("1st Spring", 
+                style: TextStyle(
+                  fontSize: 56,
+                )),
               )
             ),
             //stack container
@@ -109,9 +111,7 @@ class HomePageState extends State<HomePage> {
                         ),
                     ),  //button
                     Container(
-//                      alignment: Alignment.topCenter,
-                      //TODO: child draggablecard로 바꾸기
-//            child: Stack(alignment: Alignment.center, children: cardList),
+                      //TODO: card 크기 일정하게 고정
                       child: Stack(alignment: Alignment.center, children:  cardList),
                     ),// Card Stack
                   ],
@@ -138,68 +138,7 @@ class HomePageState extends State<HomePage> {
             ),
           ],
         ),
-
-      ),
-//        appBar: AppBar(
-//          title: Text("N년째 M계절"),
-//          backgroundColor: Colors.purple,
-//        ),
-
-      /*body: Container(
-        color: Colors.amber,
-        child: Column(
-          children: <Widget>[
-            //stack 들어가는 컨테이너
-            Container(
-              child:
-              Stack(
-                  children: <Widget>[
-
-              *//*Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              alignment: Alignment(0.0, -1.0),
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(),
-                child: Text('상태창 어디까지 길어지려나',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onPressed: () {
-                  setState(() {
-
-                  });
-                },
-              )
-          ),
-*//*
-              Container(alignment: Alignment.center,
-                  child: RaisedButton(
-                    child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
-                    onPressed: () {
-                      setState(() {
-                        CARD_START_NUM += CARDS_NUM;
-                        cardList = _generateCards();
-                      });
-                    },
-                  )
-              ),
-
-              Container(
-                //TODO: child draggablecard로 바꾸기
-//            child: Stack(alignment: Alignment.center, children: cardList),
-                child: Stack(alignment: Alignment.center, children:  cardList),
-              ),
-
-            ],
-            ),
         ),
-    ],*/
       );
   }
 
@@ -218,21 +157,13 @@ class HomePageState extends State<HomePage> {
       planetCard[i].topMargin = ((i)*10+50).toDouble();
     }
 
-    ///TODO: 임시 test func
-    func(){
-      print("hello world!");
-      print(planetCard[0].seasons);
-    }
-
     List<Widget> cardList = new List();
     //card 4개 보여주기
     for (int x = 0; x < CARDS_NUM; x++) {
-//      func();
       PlanetCard _current = planetCard[x];
       cardList.add(
         Positioned(
           top: _current.topMargin,
-          //TODO: DraggableCard로 바꿔? child Card인데..
           child: Dismissible(
             key: ValueKey(x),
             direction: DismissDirection.horizontal,
@@ -244,8 +175,6 @@ class HomePageState extends State<HomePage> {
               int dir;
               direction == DismissDirection.endToStart? dir = 0 : dir = 1;
               //TODO: 임시로 팝업 뜨는거만 확인
-
-//              endingPopup
 
               setState(() {
                 envTotalDemo.effect(_current.envStatus[dir]);
@@ -329,8 +258,10 @@ class _CustomCardState extends State<CustomCard> {
             ),
             Container(
                 width: 320,
+                height: 120,
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10,right: 10),
                 child: Column(
+                  //TODO: 크기 고정값
                   children: <Widget> [
                     Text(_planetCard.cardTitle,
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.amber),
