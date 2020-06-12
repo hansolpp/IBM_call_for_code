@@ -249,7 +249,7 @@ class HomePageState extends State<HomePage> {
               child: Padding(
                 padding: EdgeInsets.only(top: 40, left: 20, right: 140),
                 child: Container(
-                  child: Text("${_current.cardTitle}",
+                  child: Text("${_current.selectText[0]}",
                       style: TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(250, 18, 131, 142),
@@ -267,7 +267,7 @@ class HomePageState extends State<HomePage> {
               child: Padding(
                 padding: EdgeInsets.only(top: 40, left: 140, right: 20),
                 child: Container(
-                  child: Text("${_current.cardTitle}",
+                  child: Text("${_current.selectText[1]}",
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           fontSize: 20,
