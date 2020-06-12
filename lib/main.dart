@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tinder_swipe_cards/endings.dart';
 import 'package:tinder_swipe_cards/status.dart';
+import 'Intro.dart';
 import 'PlanetCard.dart';
 import 'CardDetails.dart';
-import 'PlanetCard.dart';
-import 'PlanetCard.dart';
-import 'PlanetCard.dart';
 import 'cards.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +22,9 @@ class MyApp extends StatelessWidget {
             // return new CardDetails();
           }
         },
-        home: HomePage());
+        //home: HomePage());
+        //home: MyHomePage());
+        home: Intro());
   }
 }
 
@@ -40,7 +41,10 @@ class HomePageState extends State<HomePage> {
   EnvTotalDemo envTotalDemo = new EnvTotalDemo();
   EndingPopup endingPopup = new EndingPopup();  //FIXME: 임시객체
 
+  //전역변수
   List<Widget> cardList = new List();
+  int CARD_START_NUM = 0;
+  int CARDS_NUM = 4;
 
   void removeCards(index) {
     setState(() {
@@ -53,29 +57,53 @@ class HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     cardList = _generateCards();
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
   }
 
   @override
   Widget build(BuildContext context) {
-
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text("임기 10년 째"),
-        backgroundColor: Colors.purple,
-      ),
+
       body: Stack(
         children: <Widget>[
+
+          Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              alignment: Alignment(0.0, -1.0),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(),
+                child: Text('상태창 어디까지 길어지려나',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+
+                  });
+                },
+              )
+          ),
+
           Container(alignment: Alignment.center,
               child: RaisedButton(
                 child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
                 onPressed: () {
                     setState(() {
+                      CARD_START_NUM += CARDS_NUM;
                       cardList = _generateCards();
                   });
                 },
               )
           ),
+
           Container(
             //TODO: child draggablecard로 바꾸기
 //            child: Stack(alignment: Alignment.center, children: cardList),
@@ -88,10 +116,19 @@ class HomePageState extends State<HomePage> {
 
   List<Widget> _generateCards() {
     //planetCard에서 4개 가져오기
-    const int CARDS_NUM = 4;
-    List<PlanetCard> planetCard = demoPlanetCards.sublist(0,CARDS_NUM);
+//    List<PlanetCard> planetCard = demoPlanetCards;
+    List<PlanetCard> planetCard = demoPlanetCards.sublist(CARD_START_NUM, CARD_START_NUM + CARDS_NUM);
+//    print("lenght::${demoPlanetCards.length}");
+//    planetCard = planetCard.sublist(0,4);
+//    print("demo: ${demoPlanetCards.length}, planet: ${planetCard.length}");
+//     List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
+//     planetCard = demoPlanetCards.sublist(5,7);
+
+    //FIXME: sublist cards
+//    List<PlanetCard> planetCard = demoPlanetCards;
+    //margin값 설정하기
     for(int i = 0; i<CARDS_NUM; i++){
-      planetCard[i].topMargin = ((i+5)*10).toDouble();
+      planetCard[i].topMargin = ((i+10)*10).toDouble();
     }
     List<Widget> cardList = new List();
     //card 4개 보여주기
@@ -135,32 +172,6 @@ class HomePageState extends State<HomePage> {
             },
             child: CustomCard(_current),
           ),
-
-
-          /// tinder처럼 움직이는 카드를 위한 코드
-          /*
-          child: Draggable(
-              onDragEnd: (drag) {
-                removeCards(x);
-              },
-              childWhenDragging: Container(),
-              feedback: GestureDetector( //카드 드래그중일때 설정
-                onTap: () {
-                },
-                /// 드래그하면 보여지는 카드
-                child:
-                CustomCard(planetCard[x]),
-              ),
-              child: GestureDetector(
-              onTap:(){
-                //nothing to do
-              },
-                /// 기본적으로 화면에 띄워지는 카드
-                child:
-                CustomCard(planetCard[x]),
-              )
-          ),*/
-
         ),
       );
     }
@@ -235,4 +246,3 @@ class _CustomCardState extends State<CustomCard> {
         ));
   }
 }
-

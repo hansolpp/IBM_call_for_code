@@ -5,6 +5,7 @@ import './status.dart';
 /// 일단 디버깅하기 쉽도록 변화량을 title로 넣어놨다
 /// margin은 나중에 생성할때 결정하기 - generate Card할때
 final List < PlanetCard > demoPlanetCards = [
+  //#1
   new PlanetCard(
     cardTitle: "종 +5 / 오존 +5",
     cardText: "봄1번째 ; 생명을 지킵시다 (생명존중 / 인간이 먼저다)",
