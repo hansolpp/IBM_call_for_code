@@ -9,10 +9,10 @@ class Intro extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-        primaryColor: const Color.fromARGB(255, 0, 199, 0),
-        accentColor: const Color.fromARGB(255, 222, 233, 226),
+        primaryColor: Colors.black,//const Color.fromARGB(255, 0, 199, 0),
+        accentColor: Colors.black,//.fromARGB(255, 222, 233, 226),
         brightness: Brightness.dark,
-        canvasColor: Colors.black,
+        canvasColor: Colors.white,
       ),
       home: new MyHomePage(),
       debugShowCheckedModeBanner: false,

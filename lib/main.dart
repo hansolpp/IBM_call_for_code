@@ -4,6 +4,8 @@ import 'PlanetCard.dart';
 import 'CardDetails.dart';
 import 'package:flutter/services.dart';
 
+import 'Watson.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
         },
         //home: HomePage());
         //home: MyHomePage());
-        home: Intro());
+        //home: Intro());
+        home: Watson());
   }
 }
 
@@ -39,6 +42,8 @@ class HomePageState extends State<HomePage> {
   List<Widget> cardList = new List();
   int CARD_START_NUM = 0;
   int CARDS_NUM = 4;
+  //for buttton
+  BuildContext ctx;
 
   void removeCards(index) {
     setState(() {
@@ -52,14 +57,22 @@ class HomePageState extends State<HomePage> {
     super.initState();
     cardList = _generateCards();
     SystemChrome.setEnabledSystemUIOverlays([]);
+  }
 
+  void showMessage(String msg) {
+    final snackbar = SnackBar(content: Text(msg));
+
+    Scaffold.of(ctx)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackbar);
   }
 
   @override
   Widget build(BuildContext context) {
+    //for button
+    ctx = context;
     // TODO: implement build
     return Scaffold(
-
       body: Stack(
         children: <Widget>[
 
@@ -90,9 +103,9 @@ class HomePageState extends State<HomePage> {
               child: RaisedButton(
                 child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
                 onPressed: () {
-                    setState(() {
-                      CARD_START_NUM += CARDS_NUM;
-                      cardList = _generateCards();
+                  setState(() {
+                    CARD_START_NUM += CARDS_NUM;
+                    cardList = _generateCards();
                   });
                 },
               )
