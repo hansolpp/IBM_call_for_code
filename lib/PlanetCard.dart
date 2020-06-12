@@ -78,7 +78,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
       cardTitle: "(돈-1000하고싶다) 기온 +5 / 기온 +3",
       cardText: "가을. 늦었다. (택시 / 버스). 어딘가 예산도 넣고싶어요",
       cardImage: "assets/photo_2.jpg",
-      coin: [8, 3],
+      coin: [7, 8],
       envStatus: [
         EnvStatus(temper: 5),
         EnvStatus(temper: 3),
@@ -93,7 +93,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
       cardTitle: "종 -10 / 기온 + 10",
       cardText: "가을가을. 그냥 클래스 갖다넣으면 화면에는 알아서 보여주게해야함",
       cardImage: "assets/photo_4.jpg",
-      coin: [8, 3],
+      coin: [7, 8],
       envStatus: [
         EnvStatus(species: -10),
         EnvStatus(temper: 10),
@@ -111,7 +111,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
       cardTitle: "모두 -10 / 모두 + 10",
       cardText: "겨울겨울. (예/ 아니오)",
       cardImage: "assets/photo_4.jpg",
-      coin: [8, 3],
+      coin: [7, 8],
       envStatus: [
         EnvStatus(species: -10, seaLevel: -10, temper: -10, ozone: -10),
         EnvStatus(species: 10, seaLevel: 10, temper: 10, ozone: 10),

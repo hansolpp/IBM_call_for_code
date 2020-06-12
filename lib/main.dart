@@ -54,6 +54,8 @@ class HomePageState extends State<HomePage> {
   int CARD_START_NUM = 0;
   int CARDS_NUM = 4;
   Coin coin = new Coin();
+  final List<String> _currentSeason = ["Spring", "Summer", "Fall", "Winter"];
+  int _currentIdx = -1;
 
   void removeCards(index) {
     setState(() {
@@ -67,13 +69,15 @@ class HomePageState extends State<HomePage> {
     super.initState();
     cardList = _generateCards();
     SystemChrome.setEnabledSystemUIOverlays([]);
-
   }
 
   @override
   Widget build(BuildContext context) {
+
+
     // TODO: implement build
     return Scaffold(
+      /// 연수 상단바 + 선정 상단바
       body: Container(
         color: Colors.amber[50],
         width: MediaQuery.of(context).size.width,
@@ -89,13 +93,14 @@ class HomePageState extends State<HomePage> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   //TODO: 카드 상태 따라 글자 바꾸기
-                  child: Text("1st Spring",
+                  child: Text("${_currentIdx~/4 + 1}st ${_currentSeason[_currentIdx%4]}",
                       style: TextStyle(
                         fontSize: 56,
                         color: Color.fromARGB(250, 18, 131, 142),
                       )),
                 )
             ),
+
 
             //stack container
             Expanded(
@@ -128,6 +133,7 @@ class HomePageState extends State<HomePage> {
                               envTotalDemo.reset();
                               CARD_START_NUM = 0;
                               cardList = _generateCards();
+                              _currentIdx = 0;
                             });
                           }
                           else {
@@ -151,7 +157,7 @@ class HomePageState extends State<HomePage> {
               ),
             ),
             // bottom container
-            Container(  //TODO: 다 절대값으로 해놨다. 상대값으로 바꿀것...
+            Container( //TODO: 다 절대값으로 해놨다. 상대값으로 바꿀것...
               height: 100,
               color: Colors.amber[50],
               alignment: Alignment.center,
@@ -170,9 +176,18 @@ class HomePageState extends State<HomePage> {
                     child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Image.asset("assets/icons/comp_good.jpg", width: 80, height: 80, fit: BoxFit.fill),
-                        Image.asset("assets/icons/coin.png", width: 70, height: 70, fit: BoxFit.fill),
-                        Image.asset("assets/icons/env_soso.jpg", width: 80, height: 80, fit: BoxFit.fill),
+                        Image.asset("assets/icons/comp_good.png", width: 80, height: 80, fit: BoxFit.fill),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset("assets/icons/coin.png", width: 70, height: 70, fit: BoxFit.fill),
+                            Text(" ${coin.coin}",
+                            style: TextStyle(fontSize: 40, color: Color.fromARGB(255, 188, 142, 39), fontWeight: FontWeight.bold),
+                            ),
+
+                          ],
+                        ),
+                        Image.asset("assets/icons/env_soso.png", width: 80, height: 80, fit: BoxFit.fill),
                       ],
                     ),
                   ),
@@ -188,14 +203,16 @@ class HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-    );
+        ),
+      );
   }
 
   List<Widget> _generateCards() {
     //planetCard에서 계절별로 하나씩 , 총 4개 가져오기
     List<PlanetCard> planetCard = new List();
     int _cnt = 0;
+    _currentIdx++;
+//    _currentIdx = _cnt;
 
     //spring random
     Random random = new Random();
@@ -204,6 +221,7 @@ class HomePageState extends State<HomePage> {
       planetCard.add(demoPlanetCards[i][idx]);
     }
 
+    //FIXME: sublist cards
     //margin값 설정하기
     for(int i = 0; i<CARDS_NUM; i++){
       planetCard[i].topMargin = ((i)*10).toDouble();
@@ -216,7 +234,6 @@ class HomePageState extends State<HomePage> {
       cardList.add(
         Positioned(
           top: _current.topMargin,
-          //TODO: DraggableCard로 바꿔? child Card인데..
           child: Dismissible(
             key: ValueKey(x),
             direction: coin.dir(_current.coin[0], _current.coin[1]),
@@ -288,6 +305,12 @@ class HomePageState extends State<HomePage> {
                   );
                 }
                 _cnt++;
+//                if(_currentIdx == 0) _currentIdx++;
+                if((_currentIdx+1) % 4 != 0)_currentIdx ++;
+//                _cnt > 3 ? _currentIdx : _currentIdx = _cnt;
+//                print("==================currentIdx: $_currentIdx");
+
+
                 print("CNT: ${_cnt}");
                 if(_cnt == CARDS_NUM && coin.coin < 0) {
                   showDialog(
