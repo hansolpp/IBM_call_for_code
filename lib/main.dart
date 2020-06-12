@@ -21,18 +21,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        routes: <String, WidgetBuilder>{
-          '/': (context) => Intro(),
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (context) => Intro(),
 /*          '/cardDetails': (BuildContext context) {
             // return new CardDetails();
           },*/
 //          '/HomePage' : (context) => HomePage(),
-        },
+      },
     );
-        //home: HomePage());
-        //home: MyHomePage());
+    //home: HomePage());
+    //home: MyHomePage());
 //        home: Intro());
   }
 }
@@ -104,6 +104,7 @@ class HomePageState extends State<HomePage> {
               ),
             ),
 
+
             //stack container
             Expanded(
               child: Align(
@@ -134,6 +135,7 @@ class HomePageState extends State<HomePage> {
                           ),
                         ),
                         onPressed: () {
+                          ///돈 모자랄때 엔딩
                           if (coin.coin < 0) {
                             setState(() {
                               coin = new Coin();
@@ -186,6 +188,7 @@ class HomePageState extends State<HomePage> {
                         Image.asset("assets/icons/coin.png", width: 70,
                             height: 70,
                             fit: BoxFit.fill),
+                        Text("${coin.coin}", style:TextStyle(fontSize: 42)),
                         Image.asset("assets/icons/env_soso.jpg", width: 80,
                             height: 80,
                             fit: BoxFit.fill),
@@ -197,7 +200,7 @@ class HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        ),
+      ),
     );
   }
 
