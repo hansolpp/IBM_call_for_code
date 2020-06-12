@@ -16,7 +16,7 @@ class EnvWidget extends StatefulWidget {
 
 class _EnvWidgetState extends State<EnvWidget> {
 
-  final EnvTotalDemo envTotal;
+  final EnvTotalDemo envTotal; 
 
 //뭔지모르겠는데 일단씀
   void initState(){

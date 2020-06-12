@@ -6,10 +6,16 @@ import 'PlanetCard.dart';
 import 'CardDetails.dart';
 import 'cards.dart';
 import 'package:flutter/services.dart';
+import 'popup.dart';
 
 void main() {
   runApp(MyApp());
 }
+
+
+
+
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -35,6 +41,9 @@ class HomePage extends StatefulWidget {
     return HomePageState();
   }
 }
+
+
+
 
 class HomePageState extends State<HomePage> {
 
@@ -96,88 +105,98 @@ class HomePageState extends State<HomePage> {
               child: RaisedButton(
                 child: Text('버튼을 눌러주세요!',textAlign: TextAlign.center,),
                 onPressed: () {
-                    setState(() {
-                      CARD_START_NUM += CARDS_NUM;
-                      cardList = _generateCards();
-                  });
-                },
-              )
-          ),
-
-          Container(
-            //TODO: child draggablecard로 바꾸기
-//            child: Stack(alignment: Alignment.center, children: cardList),
-            child: Stack(alignment: Alignment.center, children:  cardList),
-          ),
-        ],
-      )
-    );
-  }
-
-  List<Widget> _generateCards() {
-    //planetCard에서 4개 가져오기
-//    List<PlanetCard> planetCard = demoPlanetCards;
-    List<PlanetCard> planetCard = demoPlanetCards.sublist(CARD_START_NUM, CARD_START_NUM + CARDS_NUM);
-//    print("lenght::${demoPlanetCards.length}");
-//    planetCard = planetCard.sublist(0,4);
-//    print("demo: ${demoPlanetCards.length}, planet: ${planetCard.length}");
-//     List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
-//     planetCard = demoPlanetCards.sublist(5,7);
-
-    //FIXME: sublist cards
-//    List<PlanetCard> planetCard = demoPlanetCards;
-    //margin값 설정하기
-    for(int i = 0; i<CARDS_NUM; i++){
-      planetCard[i].topMargin = ((i+10)*10).toDouble();
-    }
-    List<Widget> cardList = new List();
-    //card 4개 보여주기
-    for (int x = 0; x < CARDS_NUM; x++) {
-      PlanetCard _current = planetCard[x];
-      cardList.add(
-        Positioned(
-          top: _current.topMargin,
-          //TODO: DraggableCard로 바꿔? child Card인데..
-          child: Dismissible(
-            key: ValueKey(x),
-            direction: DismissDirection.horizontal,
-            background: Container(child: Text("${_current.cardTitle}"), color: Colors.red),
-            secondaryBackground: Container(color: Colors.green),
-//            crossAxisEndOffset: 1,
-            onDismissed: (direction){
-              //TODO: add code here to do something when card dissapers
-              int dir;
-              direction == DismissDirection.endToStart? dir = 0 : dir = 1;
-              //TODO: 임시로 팝업 뜨는거만 확인
-
-//              endingPopup
-
-              setState(() {
-                envTotalDemo.effect(_current.envStatus[dir]);
-                print("===========================================sp:${envTotalDemo.species},sea:${envTotalDemo.seaLevel},ozo:${envTotalDemo.ozone},temp:${envTotalDemo.temper}");
-                removeCards(x);
-
-                //TODO: 팝업 테스트
-                List<EndingCard> enableEndings = envTotalDemo.getEnableEndings();
-                print("LENGTH: ${enableEndings.length}");
-                if(enableEndings.isNotEmpty){
                   showDialog(
-                    context: context,
-                    //TODO: 알람 내용 바꾸기
-                    //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
-                    builder: (_) => EndingPopup(endingCard: enableEndings[0],),
-                    barrierDismissible: false,
-                  );
-                }
-              });
-            },
-            child: CustomCard(_current),
-          ),
-        ),
-      );
-    }
-    return cardList;
-  }
+                                        context: context,
+                                        //TODO: 알람 내용 바꾸기
+                                        //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
+                                        builder: (_) => Year_Popup(),
+                                        barrierDismissible: false,
+                                      );
+                  
+                                setState(() {
+                                  CARD_START_NUM += CARDS_NUM;
+                                  cardList = _generateCards();
+                                  
+                              });
+                            },
+                          )
+                      ),
+                    
+                              Container(
+                                //TODO: child draggablecard로 바꾸기
+                    //            child: Stack(alignment: Alignment.center, children: cardList),
+                                child: Stack(alignment: Alignment.center, children:  cardList),
+                              ),
+                            ],
+                          )
+                        );
+                      }
+                    
+                      List<Widget> _generateCards() {
+                        //planetCard에서 4개 가져오기
+                    //    List<PlanetCard> planetCard = demoPlanetCards;
+                        List<PlanetCard> planetCard = demoPlanetCards.sublist(CARD_START_NUM, CARD_START_NUM + CARDS_NUM);
+                    //    print("lenght::${demoPlanetCards.length}");
+                    //    planetCard = planetCard.sublist(0,4);
+                    //    print("demo: ${demoPlanetCards.length}, planet: ${planetCard.length}");
+                    //     List<PlanetCard> planetCard = demoPlanetCards.sublist(0,4);
+                    //     planetCard = demoPlanetCards.sublist(5,7);
+                    
+                        //FIXME: sublist cards
+                    //    List<PlanetCard> planetCard = demoPlanetCards;
+                        //margin값 설정하기
+                        for(int i = 0; i<CARDS_NUM; i++){
+                          planetCard[i].topMargin = ((i+10)*10).toDouble();
+                        }
+                        List<Widget> cardList = new List();
+                        //card 4개 보여주기
+                        for (int x = 0; x < CARDS_NUM; x++) {
+                          PlanetCard _current = planetCard[x];
+                          cardList.add(
+                            Positioned(
+                              top: _current.topMargin,
+                              //TODO: DraggableCard로 바꿔? child Card인데..
+                              child: Dismissible(
+                                key: ValueKey(x),
+                                direction: DismissDirection.horizontal,
+                                background: Container(child: Text("${_current.cardTitle}"), color: Colors.red),
+                                secondaryBackground: Container(color: Colors.green),
+                    //            crossAxisEndOffset: 1,
+                                onDismissed: (direction){
+                                  //TODO: add code here to do something when card dissapers
+                                  int dir;
+                                  direction == DismissDirection.endToStart? dir = 0 : dir = 1;
+                                  //TODO: 임시로 팝업 뜨는거만 확인
+                    
+                    //              endingPopup
+                    
+                                  setState(() {
+                                    envTotalDemo.effect(_current.envStatus[dir]);
+                                    print("===========================================sp:${envTotalDemo.species},sea:${envTotalDemo.seaLevel},ozo:${envTotalDemo.ozone},temp:${envTotalDemo.temper}");
+                                    removeCards(x);
+                    
+                                    //TODO: 팝업 테스트
+                                    List<EndingCard> enableEndings = envTotalDemo.getEnableEndings();
+                                    print("LENGTH: ${enableEndings.length}");
+                                    if(enableEndings.isNotEmpty){
+                                      showDialog(
+                                        context: context,
+                                        //TODO: 알람 내용 바꾸기
+                                        //TODO: 엔딩 가능 리스트중에서 랜덤으로 고르기
+                                        builder: (_) => EndingPopup(endingCard: enableEndings[0],),
+                                        barrierDismissible: false,
+                                      );
+                                    }
+                                  });
+                                },
+                                child: CustomCard(_current),
+                              ),
+                            ),
+                          );
+                        }
+                        return cardList;
+                      }
+                    
 }
 
 class CustomCard extends StatefulWidget{
