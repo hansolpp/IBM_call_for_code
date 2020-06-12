@@ -24,8 +24,8 @@ final List< List < PlanetCard > > demoPlanetCards = [
     new PlanetCard(
       cardTitle: "종 +3 / 종 -3",
       cardText: "봄2번째 ",
-      coin: [8, 3],
       cardImage: "assets/photo_1.jpg",
+      coin: [8, 3],
       envStatus: [
         EnvStatus(species: 3),
         EnvStatus(species: -3),
@@ -44,7 +44,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
       cardTitle: "종 -3, 해수면 +5 / 해수면 -5, 오존 +2, 기온 + 10",
       cardText: "기온이 38도인데 에어컨을 틀까? ( 버티기 / 틀기 )",
       cardImage: "assets/photo_1.jpg",
-      coin: [7, 14],
+      coin: [8, 3],
       envStatus: [
         EnvStatus(species: -3, seaLevel: 5),
         EnvStatus(seaLevel: -5, ozone: 2, temper: 10),
@@ -58,8 +58,8 @@ final List< List < PlanetCard > > demoPlanetCards = [
     new PlanetCard(
       cardTitle: "해수면 +5 / 오존 +1, 기온 +1",
       cardText: "여름여름",
-      coin: [5, 6],
       cardImage: "assets/photo_2.jpg",
+      coin: [8, 3],
       envStatus: [
         EnvStatus(seaLevel: 5),
         EnvStatus(ozone: 1, temper: 1),
@@ -123,10 +123,10 @@ final List< List < PlanetCard > > demoPlanetCards = [
       seasons: Seasons.WINTER,
     ),
     new PlanetCard(
-      coin: [7, 8],
       cardTitle: "변화 X / 모두 + 5",
       cardText: "겨울. 변화량 글자쓰는거 너무 귀찮아... 2번째 겨울",
       cardImage: "assets/photo_1.jpg",
+      coin: [8, 3],
       envStatus: [
         EnvStatus(),
         EnvStatus(species: 5, seaLevel: 5, ozone: 5, temper: 5),
