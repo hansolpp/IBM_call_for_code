@@ -93,7 +93,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
     new PlanetCard(
       cardTitle: "종 -10 / 기온 + 10",
       cardText: "한반도 이상 기후 현상으로 겨울에도 고온 현상 기록",
-      cardImage: "assets/animal.jpg",
+      cardImage: "assets/animal.png",
       coin: [9, 10],
       envStatus: [
         EnvStatus(species: 10),
