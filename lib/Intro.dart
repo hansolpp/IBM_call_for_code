@@ -12,7 +12,7 @@ class Intro extends StatelessWidget {
         primaryColor: Colors.black,//const Color.fromARGB(255, 0, 199, 0),
         accentColor: Colors.black,//.fromARGB(255, 222, 233, 226),
         brightness: Brightness.dark,
-        canvasColor: Colors.white,
+        canvasColor: Colors.amber[50],
       ),
       home: new MyHomePage(),
       debugShowCheckedModeBanner: false,

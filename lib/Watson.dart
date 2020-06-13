@@ -52,6 +52,7 @@ class _WatsonState extends State<Watson> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(250, 154, 204, 235),
         title: Text('환경부 장관실',
           style: TextStyle(
             fontSize: 30,
@@ -84,48 +85,56 @@ class _WatsonState extends State<Watson> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              //FloatingActionButton(
-              //  child: Icon(Icons.all_inclusive),
-              //),
-              Text(
-                _text != null ? '$_text' : '\"똑똑\"',
-                style: TextStyle(
-                  fontSize: 20,
+          //FloatingActionButton(
+          //  child: Icon(Icons.all_inclusive),
+          //),
+            Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: Colors.amber[50],
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))
                 ),
-                textAlign: TextAlign.left,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                controller: myController,
-                decoration: InputDecoration(
-                  hintText: '메세지 보내기',
-                  contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                child: Text(
+                  _text != null ? '$_text' : '\"똑똑\"',
+                  style: TextStyle(
+                    fontSize: 20,
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                    BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                    BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                  ),
+                  textAlign: TextAlign.left,
+                )
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            TextField(
+              controller: myController,
+              decoration: InputDecoration(
+                hintText: '메세지 보내기',
+                contentPadding:
+                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                  BorderSide(color: Color.fromARGB(250, 154, 204, 235), width: 1.0),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                  BorderSide(color: Color.fromARGB(250, 154, 204, 235), width: 2.0),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
-              SizedBox(
-                height: 20.0,
-              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(250, 154, 204, 235),
         onPressed: _callWatsonAssistant,
         child: Icon(Icons.send),
       ),

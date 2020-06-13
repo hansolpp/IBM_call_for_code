@@ -103,9 +103,9 @@ class HomePageState extends State<HomePage> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   //TODO: 카드 상태 따라 글자 바꾸기
-                  child: Text("${_currentIdx~/4 + 1}st ${_currentSeason[_currentIdx%4]}",
+                  child: Text("${_currentIdx~/4 + 1}년차 ${_currentSeason[_currentIdx%4]}",
                       style: TextStyle(
-                        fontSize: 56,
+                        fontSize: 45,
                         color: Color.fromARGB(250, 18, 131, 142),
                       )),
                 )
@@ -142,7 +142,7 @@ class HomePageState extends State<HomePage> {
                           ),
                         ),
                         onPressed: () {
-                          if(coin.coin < 0) {
+                          if(coin.coin < 10) {
                             setState(() {
                               coin = new Coin();
                               envTotalDemo.reset();
@@ -155,7 +155,7 @@ class HomePageState extends State<HomePage> {
                             setState(() {
                               CARD_START_NUM += CARDS_NUM;
                               cardList = _generateCards();
-
+                              coin.add(10);
                             });
                           }
                         },
@@ -257,11 +257,11 @@ class HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20.0)
               ),
               child: Padding(
-                padding: EdgeInsets.only(top: 40, left: 20, right: 140),
+                padding: EdgeInsets.only(top: 40, left: 20, right: 195),
                 child: Container(
                   child: Text("${_current.selectText[0]}",
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           color: Color.fromARGB(250, 18, 131, 142),
                           fontWeight: FontWeight.bold
                       )
@@ -275,12 +275,12 @@ class HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20.0)
               ),
               child: Padding(
-                padding: EdgeInsets.only(top: 40, left: 140, right: 20),
+                padding: EdgeInsets.only(top: 40, left: 195, right: 20),
                 child: Container(
                   child: Text("${_current.selectText[1]}",
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           color: Colors.white,
                           fontWeight: FontWeight.bold
                       )
@@ -326,7 +326,7 @@ class HomePageState extends State<HomePage> {
 
 
                 print("CNT: ${_cnt}");
-                if(_cnt == CARDS_NUM && coin.coin < 0) {
+                if(_cnt == CARDS_NUM && coin.coin < 10) {
                   showDialog(
                     context: context,
                     //TODO: 알람 내용 바꾸기
