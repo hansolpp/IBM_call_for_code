@@ -88,7 +88,7 @@ class _WatsonState extends State<Watson> {
               //  child: Icon(Icons.all_inclusive),
               //),
               Text(
-                _text != null ? '$_text' : '똑똑',
+                _text != null ? '$_text' : '\"똑똑\"',
                 style: TextStyle(
                   fontSize: 20,
                 ),
