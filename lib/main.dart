@@ -131,7 +131,7 @@ class HomePageState extends State<HomePage> {
                                 '해수면 높이 : ${envTotalDemo.seaLevel}m\n'+
                                 '연 평균 기온 상승도 : ${envTotalDemo.temper}\n'+
                                 '오존층 파괴 두께 : ${envTotalDemo.ozone}\n'+
-                                    '입니다.\n앞으로도 수고해주세요^^',
+                                    '입니다.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.lightBlue[900],

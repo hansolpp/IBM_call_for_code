@@ -81,10 +81,11 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       body: ListView(
         children: <Widget>[
           new Container(
-            child: Image.asset("assets/last_photo.png"),
+            padding: EdgeInsets.only(top: 70),
+            child: Image.asset("assets/chatbot.png"),
           ),
           new Container(
-            margin: new EdgeInsets.symmetric(vertical: 50.0, horizontal: 10.0),
+            margin: EdgeInsets.only(right: 30, left: 30, bottom: 70),
             child: _characterCount == null ? null : new AnimatedBuilder(
               animation: _characterCount,
               builder: (BuildContext context, Widget child) {

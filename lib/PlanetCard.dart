@@ -45,7 +45,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
       cardTitle: "종 -3, 해수면 +5 / 해수면 -5, 오존 +2, 기온 + 10",
       cardText: "저탄소 사회 전환을 위해",
       cardImage: "assets/energy.png",
-      coin: [8, 7],
+      coin: [18, 18],
       envStatus: [
         EnvStatus(species: 5, seaLevel: 5, ozone:10),
         EnvStatus(seaLevel: -5, ozone: -10, temper: -10),
@@ -78,7 +78,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
       cardTitle: "(돈-1000하고싶다) 기온 +5 / 기온 +3",
       cardText: "친환경 대중교통",
       cardImage: "assets/transpo.png",
-      coin: [6, 9],
+      coin: [9, 9],
       envStatus: [
         EnvStatus(temper: 5),
         EnvStatus(temper: 3),
@@ -94,7 +94,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
       cardTitle: "종 -10 / 기온 + 10",
       cardText: "한반도 이상 기후 현상으로 겨울에도 고온 현상 기록",
       cardImage: "assets/animal.png",
-      coin: [9, 10],
+      coin: [10, 10],
       envStatus: [
         EnvStatus(species: 10),
         EnvStatus(species: -10),
@@ -113,7 +113,7 @@ final List< List < PlanetCard > > demoPlanetCards = [
       cardTitle: "해수면 +5 / 오존 +1, 기온 +1",
       cardText: "유엔기후변화협약",
       cardImage: "assets/meeting.png",
-      coin: [16, 5],
+      coin: [7, 7],
       envStatus: [
         EnvStatus(seaLevel: 1, ozone:1, temper:1),
         EnvStatus(ozone: -1, temper: -1),
